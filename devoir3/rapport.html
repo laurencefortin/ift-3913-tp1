@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="fr">
+   <head>
+      <title>IFT2255 TP3 EQ:16</title>
+      <style type="text/css">
+         table {
+         border: outset 2px black;
+         border-collapse: collapse;
+         }
+         th {
+         border: solid 1px black;
+         border-bottom: double 2px black;
+         }
+         td {
+         border: solid 1px black;
+         }
+         .first_col {
+         border-right: double 2px black;
+         }
+         p{
+         margin: 20px;
+         }
+         img {
+            width: 50%;
+         }
+      </style>
+   </head>
+   <body>
+      <h1 style="text-align: center;">IFT 2255 - Devoir 3</h1>
+      <h2>Information général - Équipe 16</h2>
+      <p>
+         <span style="font-weight: bold;">Nom: </span>Laurence Fortin<br>
+         <span style="font-weight: bold;">Matricule: </span>20088891<br>
+         <span style="font-weight: bold;">Courriel: </span>laurence.fortin.3@umontreal.ca<br>
+         <span style="font-weight: bold;">Temps mis: </span>25 heures
+      </p>
+      <p>
+         <span style="font-weight: bold;">Nom: </span>Julien Lanctôt<br>
+         <span style="font-weight: bold;">Matricule: </span>20140970<br>
+         <span style="font-weight: bold;">Courriel: </span>julien.lanctot@umontreal.ca<br>
+         <span style="font-weight: bold;">Temps mis: </span>25 heures
+      </p>
+      <p>
+         <span style="font-weight: bold;">Nom: </span>Olivier Provost<br>
+         <span style="font-weight: bold;">Matricule: </span>20101738<br>
+         <span style="font-weight: bold;">Courriel: </span>olivier.provost.1@umontreal.ca<br>
+         <span style="font-weight: bold;">Temps mis: </span>25 heures
+      </p>
+      <h2>Distribution des tâches</h2>
+      <p style="font-weight: bold;">Soumetteur: Olivier Provost</p>
+      <table cellpadding="9px">
+         <thead>
+            <tr>
+               <th class="first_col">Tâche</th>
+               <th>Laurence</th>
+               <th>Julien</th>
+               <th>Olivier</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr>
+               <td class="first_col">Implémentaion en Java</td>
+               <td>Implémentation (33%)</td>
+               <td>Implémentation (33%)</td>
+               <td>Implémentation (33%)</td>
+            </tr>
+            <tr>
+               <td class="first_col">Tests unitaires</td>
+               <td>Test (20%)</td>
+               <td>Test (20%)</td>
+               <td>Test (60%)</td>
+            </tr>
+            <tr>
+               <td class="first_col">Livraison et documentaion</td>
+               <td>JavaDoc (33%)</td>
+               <td>JavaDoc + ANT (33%)</td>
+               <td>JavaDoc + Manuel Utilisateur  (33%)</td>
+            </tr>
+            <tr>
+               <td class="first_col">Mise à Jour des anciens Artéfacts</td>
+               <td>Conception + Exigences (33%)</td>
+               <td>Conception (33%)</td>
+               <td>Conception + Hypothèses (33%)</td>
+            </tr>
+            <tr>
+         </tbody>
+      </table>
+      <h2>Hypothèses</h2>
+      <p>
+         <li><strong>Stockage des données :</strong></li>
+         Puisqu'on ne demande pas de faire une base de données, il devient difficile de bien gérer les enregistrements
+         dans le Centre des Données, sans qu'il y ait de la corruption/perte de données. Donc, nous avons fait
+         l'hypothèses qu'un seul ordinateur est disponible pour l'agent à la réception. Les enregistrements des données
+         sont fait à même cet ordniateur. Une procédure de sauvegarde pourrait être mise en place, afin d'avoir une copie
+         des enregistrements.
+
+         <li><strong>Procédure comptable :</strong></li>
+		   Pour permettre l'exécution de la procédure comptable à minuit chaque vendredi, nous avons 
+		   ajouté un option dans le menu afin de simuler cette action et générer les rapports quand nous le voulons.
+
+         <li><strong>Services Comptables Rnd :</strong></li>
+         Tout comme la procédure comptable, on a encore une fois ajouté une option qui permer créer les différents TEF en tout temps.
+         Nous avons aussi ajouté un option qui permet de payer la balance d'un Membre qui serait suspendu.
+         
+         <li><strong>Lecture/écriture des CSVs :</strong></li>
+         Notre programme lit les informations des Membres/Services/Inscriptions/Participations à partir des fichiers CSV joint au JAR. La lecture se fait automatiquement au démarrage du logiciel, mais l'écriture se fait seulement lorsqu'on choisit l'option quitter (0) du menu principal. 
+     
+         <li><strong>Validation :</strong></li>
+         Pour simplifier l'utilisation du logiciel par l'agent du #GYM. On valide seulement une fois le numéro d'un Membre, lorsque c'est le cas, l'agent a accès à un autre menu qui permet de gérer toutes les actions possibles sur le dit Membre. Si ce membre veut seulement accéder à la salle du #GYM, l'agent peut simplement retourner au menu principal en choisissant l'option 0 du menu membre.
+
+         <li><strong>Simulation :</strong></li>
+         Tout ce qui serait normalement exécuté par un autre service et/ou application est disponible dans notre logiciel via les différents menus et identifié à l'aide du mot clef (Simulation) à la suite de l'option du menu en question.
+      </p>
+      <h2>Tâche 1 - Implémentaion en Java :</h2>
+      <p>
+               Voici un <a href="./Implementation/devoir3.jar">lien</a> vers le fichier JAR du prototype.
+
+      </p>
+      <h2>Tâche 2 - Tests unitaires :</h2>
+     <p>
+		<ol>
+         <li><strong>Tests du Répertoire des Membres :</strong>
+            <p>
+                <img src="./Tests/repertoireMembresTest.png"  alt="Tests_unitaire_repertoireMembres" /><br><br>
+			   </p>
+         </li>
+         <li><strong>Tests du Répertoire des Services :</strong>
+               <p>
+                   <img src="./Tests/repertoireServicesTest.png"  alt="Tests_unitaire_repertoireServices" /><br><br>
+               </p>
+            </li>
+      </ol>
+        </p>
+      <h2>Tâche 3 -  Livraison et documentation :</h2>
+      <p>
+         Voici un <a href="./Implementation/doc/index.html" target="_blank">lien</a> vers notre JavaDoc.
+      </p>
+      <p>
+         Voici un <a href="./Documentation/manuelUtilisateur.md" target="_blank">lien</a> vers notre Manuel utilisateur.
+      </p>
+
+
+
+      <h2>Artéfacts de conception :</h2>
+      <h3>WorkFlow des exigences:</h3> 
+      <h4>Glossaire</h4>
+      <p>
+         <ul>
+            <li><strong>#GYM</strong> : Centre sportif qui offre des Services pour différentes activités physiques et un accès une salle de machines, piscine, salles multisports, etc.</li>
+         </ul>
+         <ul>
+            <li><strong>Non-Utilisateur</strong> : Personne qui n'est pas un Membre du #GYM.</li>
+            <li><strong>Utilisateur</strong> : Membre ou Professionnel du #GYM.</li>
+            <li><strong>Membre</strong> : Utilisateur du #GYM, pouvant s'inscire à des servies et profiter du centre sportif.</li>
+            <li><strong>Professionnel</strong> : Utilisateur qui offre des Services de consultations et entrainement aux Membres.</li>
+            <li><strong>Gestionnaire</strong> : Employé du #GYM pouvant générer le rapport de la procédure comptable.</li>
+            <li><strong>Agent</strong> : Employé du #GYM, il est l'Utilisateur du logiciel. Intéraction avec les Utilisateurs du #GYM.</li>
+         </ul>
+         <ul>
+            <li><strong>Service</strong> : Entrainements et consultations avec un Professionnel.</li>
+            <li><strong>Séance</strong> : Occurrence d’un service qui a lieu à une certaine, un certain jour avec une capacité maximale.</li>
+            <li><strong>Enregistrement</strong> : Confirmation d'inscription ou de présence à un Service.</li>
+            <li><strong>Requête</strong> : Demande envoyée par l’Agent pour compléter une action en lien avec le Centre de Données.<br></li>
+         </ul>
+         <ul>
+            <li><strong>Numéro d'Utilisateur</strong> : Numéro identifiant uniquement un Utilisateur du #GYM.</li>
+            <li><strong>Code de Service</strong> : Code à 7 chiffres identifiant uniquement un Service.</li>
+         </ul>
+         <ul>
+            <li><strong>Réception</strong> : Lieu de base du #GYM (où ont lieu les intéractions avec l'Agent).</li>
+            <li><strong>Centre de Données</strong> : Répertoire des informations des Utilisateurs, des Services, des Séances, des Inscription et des Participations du #GYM. </li>
+            <li><strong>Répertoire de Services</strong> : Services offerts la journée même.</li>
+            <li><strong>Confirmation de présence</strong> :  Action qu’effectue le membre pour indiquer que le service a été rendu en avance.</li>
+            <li><strong>Requête</strong> : Demande effectuée au système afin d’obtenir certaines informations.</li>
+         </ul>
+      </p>
+
+		<h4>Diagramme de cas d'utilisation UML</h4>
+	    <p>
+         <img src="./exigences/diagramme_use_case.png" width="600px" alt="diagramme_use_case" /><br><br>
+         Voici un <a href="./exigences/diagramme_use_case.vpp">lien</a> vers le fichier du diagramme.
+      </p>
+      <h4>
+        Cas d'utilisation
+      </h4>     
+	  <p>
+         <font size="3"><strong>Cas d’utilisation #1 : Inscription d'un non-Utilisateur au #GYM.</strong></font> <br>
+         But : Un non-Utilisateur veut s'inscrire au #GYM pour avoir accès aux différents Services (Membre) ou pour offrir des Services (Profesionnel).<br>
+         Acteurs : Non-Utilisateur (principal), Agent à la réception (secondaire).<br>
+         Scénario principal : <br>
+         &nbsp; 1. non-Utitilisateur se présente à la réception.<br>
+         &nbsp; 2. Agent demande les informations requises pour compléter la demande.<br>
+         &nbsp; 3. Agent inscrit les informations sur l'ordinateur.<br> 
+         &nbsp; 4. Agent enregistre les informations dans le Centre de Donnés.<br>
+         &nbsp; 5. Agent fournit le numéro d'Utilisateur unique au nouvel Utilisateur du #GYM.<br>
+         Scénarios alternatifs :<br>
+         &nbsp; 2.a. non-Utitilisateur ne veut pas partager ses informations :<br>
+         &nbsp; &nbsp; 2.a.1. Agent demande au non-Utilisateur de quitter.<br>
+         &nbsp; 3.a. Erreur dans les informations :<br>
+         &nbsp; &nbsp; 3.a.1. Le scénario reprend à l'étape #2.<br>
+         Postconditions : non-Utilisateur devient un Utilisateur du #GYM, il y a un nouvel enregistrement dans le Centre des Données sur l'Utilisateur.<br>
+      </p>
+      <p>
+         <font size="3"><strong> Cas d’utilisation #2 : Validation d'un numéro d'Utilisateur au #GYM.</strong></font><br>
+         But : Un Utilisateur veut valider son numéro pour avoir accès au #GYM et ses Services.<br>
+         Préconditions : L'Utilisateur doit avoir son numéro d'Utilisateur.<br>
+         Acteurs : Utilisateur (principal), Agent à la réception (secondaire).<br>
+         Scénario principal : <br>
+         &nbsp; 1. Utilisateur se présente à la réception avec son numéro d'Utilisateur.<br>
+         &nbsp; 2. Agent vérifie la validité du numéro d'Utilisateur.<br>
+         &nbsp; 3. Le numéro est validé, le mot validé est affiché sur l’écran.<br>
+         &nbsp; 4. Agent permet l’accès au #GYM à l'Utilisateur.<br>
+         Scénarios alternatifs : <br>
+         &nbsp; 2.a.  Le numéro est invalide (introuvable) :<br>
+         &nbsp; &nbsp; 2.a.1. La raison de l’invalidité est affichée sur l’écran.<br>
+         &nbsp; &nbsp; 2.a.2. Agent demande à nouveau le numéro d'Utilisateur.<br>
+         &nbsp; &nbsp; 2.a.3. Le scénario reprend à l'étape #2.<br>
+         &nbsp; 2.b.   Le numéro est invalide (Utilisateur suspendu) : <br>
+         &nbsp; &nbsp; 2.b.1. La raison de l’invalidité est affichée sur l’écran.<br>
+         &nbsp; &nbsp; 2.b.2. Agent demande à l'Utilisateur de quitter.<br>
+         Postconditions : Utilisateur peut accéder aux différents Services du #GYM.<br>
+      </p>
+      <p>
+         <font size="3"><strong>Cas d’utilisation #3 : Mettre à jour un Utilisateur.</strong></font><br>
+         But : Un Utilisateur veut changer les informations de son compte.<br>
+         Préconditions : L'Utilisateur doit être inscrit au #GYM. Le numéro d'Utilisateur a préalablement été validé.<br>
+         Acteurs : Utilisateur (principal), Agent à la réception (secondaire).<br>
+         Scénario principal : <br>
+         &nbsp; 1. Utilisateur est à la réception et veut modifier les informations de son compte.<br>
+         &nbsp; 2. Agent demande quelles informations l'Utilisateur veut modifier.<br>
+         &nbsp; 3. Agent modifie les informations dans du compte Utilisateur.<br>
+         &nbsp; 4. Agent enregistre les informations dans le Centre de Donnés.<br>
+         Postconditions : Les informations de l'Utilisateur sont modifiées dans le Centre des Données.<br>
+      </p>
+      <p>
+         <font size="3"><strong>Cas d’utilisation #4 : Supprimer un Utilisateur.</strong></font><br>
+         But : Un Utilisateur veut supprimer son inscription au #GYM.<br>
+         Préconditions : L'Utilisateur doit être inscrit au #GYM. Le numéro d'Utilisateur a préalablement été validé.<br>
+         Acteurs : Utilisateur (principal), Agent à la réception (secondaire).<br>
+         Scénario principal : <br>
+         &nbsp; 1. Utilisateur est à la réception et veut supprimer son inscription.<br>
+         &nbsp; 2. Agent supprime l'inscription de l'Utilisateur du Centre de Données.<br>
+         &nbsp; 3. Agent confirme la suppression à l'Utilisateur.<br>
+         Postconditions : Utilisateur n'est plus inscrit au #GYM.<br>
+      </p>
+      <p>
+         <font size="3"><strong>Cas d’utilisation #5 : Inscription à un Service.</strong></font><br>
+         But : Un Utilisateur veut s’inscrire à un Service.<br>
+         Préconditions :  L'Utilisateur doit être inscrit au #GYM. Le numéro d'Utilisateur a préalablement été validé. Au moins un Profesionnel a 
+         préalablement offert un Service. Il y a au moins un Service qui n'est pas à capacité maximal.<br>
+         Acteurs : Utilisateur (principal), Agent à la réception (secondaire)<br>
+         Scénario principal : <br>
+         &nbsp; 1. Utilisateur est à la réception et veut s'inscrire à un Service.<br>
+         &nbsp; 2. Agent consulte le Répertoire des Services à l'aide du Cas d'Utilisation #7<br>
+         &nbsp; 3. Agent sélectionne la Séance du Service demandée par l'Utilisateur.<br>
+         &nbsp; 4. Agent enregistre l'inscription dans le Centre de Données.<br>
+         &nbsp; 5. Agent confirme l’inscription à l'Utilisateur.<br>
+         Scénarios alternatifs : <br>
+         &nbsp; 3.a. Le Service est à capacité maximale :<br>
+         &nbsp; &nbsp; 3.a.1. Le scénario reprend à l'étape #2.<br>
+         &nbsp; 3.b. Aucun Service offert n'intéresse l'Utilisateur :<br>
+         &nbsp; &nbsp; 3.b.1. Fin du scénario.<br>
+         Postconditions : Utilisateur est inscrit au Service, il y a un nouvel enregistrement dans le Centre des Données sur l'inscription.<br>
+      </p>
+      <p>
+         <font size="3"><strong>Cas d’utilisation #6 : Participation à un Service.</strong></font><br>
+         But : Un Utilisateur veut confirmer sa participation à un Service.<br>
+         Préconditions : L'Utilisateur doit être inscrit au #GYM et un Agent doit être disponible à 
+         la réception. Le numéro d'Utilisateur a préalablement été validé. L'Utilisateur doit avoir 
+         être préalablement inscrit à un Service.<br>
+         Acteurs : Utilisateur (principal), Agent à la réception (secondaire).<br>
+         Scénario principal : <br>
+         &nbsp; 1. Utilisateur est à la réception et veut confirmer sa participation à un Service.<br>
+         &nbsp; 2. Agent consulte le Répertoire des Services à l'aide du Cas d'Utilisation #7<br>
+         &nbsp; 3. Agent sélectionne la Séance du Service demandée par l'Utilisateur.<br>
+         &nbsp; 4. Agent enregistre la participation dans le Centre de Données.<br>
+         &nbsp; 5. Agent confirme la participation à l'Utilisateur.<br>
+         Scénarios alternatifs : <br>
+         &nbsp; 2.a. Utilisateur est inscrit à aucune Séance d'un Service :<br>
+		   &nbsp; &nbsp; 2.a.1. Agent explique à l'Utilisateur qu'il doit s'inscrire à un Service avant de pouvoir y participer.<br>
+         &nbsp; &nbsp; 2.a.2. Fin du scénario<br>
+         Postconditions : Utilisateur participe à la Séance du Service, il y a un nouvel enregistrement dans le Centre des Données sur la participation.<br>
+      </p>
+      <p>
+         <font size="3"><strong>Cas d’utilisation #7 : Consulter le Répertoire des Services.</strong></font><br>
+         But : Un Utilisateur veut consulter les Services du répetoire.<br>
+         Préconditions : L'Utilisateur doit être inscrit au #GYM et un Agent doit être disponible à 
+         la réception. Le numéro d'Utilisateur a préalablement été validé. L'Utilisateur veut s'inscire ou participer à un Service.<br>
+         Acteurs : Utilisateur (principal), Agent à la réception (secondaire).<br>
+         Scénario principal : <br>
+         &nbsp; 1. Agent consulte le répertoire des Services.<br>
+         &nbsp; 2. Agent montre à L'Utilisateur les Services disponibles, la journée même<br>
+         Postconditions : <br>
+      </p>
+      <p>
+         <font size="4"> <strong>Cas d’utilisation #8 : Offrir un Service.</strong></font><br>
+         But : Un Utilisateur veut offrir un Service.<br>
+         Préconditions : L'Utilisateur est préalablement inscrit au #GYM en tant que Profesionnel. Le numéro d'Utilisateur a préalablement été validé.<br>
+         Acteurs : Profesionnel (principal), Agent à la réception (secondaire)<br>
+         Scénario principal : <br>
+         &nbsp; 1. Utilisateur est à la réception et souhaite offrir un nouveau Service.<br>
+         &nbsp; 2. Agent demande les informations requises pour compléter la demande.<br>
+         &nbsp; 3. Agent inscrit les informations sur l'ordinateur.<br> 
+         &nbsp; 5. Agent enregistre les informations dans le Centre de Donnés.<br>
+         &nbsp; 4. Agent fournit le Code de Service unique à l'Utilisateur et confirme sa création.<br>
+         Scénarios alternatifs :<br>
+         &nbsp; 2.a. Utitilisateur ne donne pas les informations nécessaires :<br>
+         &nbsp; &nbsp; 2.a.1. Fin du scénario.<br>
+         &nbsp; 3.a. Erreur dans les informations :<br>
+         &nbsp; &nbsp; 3.a.1. Le scénario reprend à l'étape #2.<br>
+         Postconditions : Utilisateur offre maintenant un nouveau Service, et d'autres Utilisateurs peuvent maintenant s'y inscrire, il y a un nouvel enregistrement dans le Centre des Données sur le Service.<br>
+      </p>
+      <p>
+         <font size="3"><strong>Cas d’utilisation #9 : Consulter les inscriptions à un Service.</strong></font><br>
+         But : Un Utilisateur veut voir les inscriptions à ses Services.<br>
+         Préconditions : L'Utilisateur est préalablement inscrit au #GYM en tant que Profesionnel. Le numéro d'Utilisateur a préalablement été validé. L'Utilisateur a au moins un Service d'enregistré dans le Centre des Données.<br>
+         Acteurs : Professionnel (principal), Agent à la réception (secondaire).<br>
+         Scénario principal : <br>
+         &nbsp; 1. Professionnel est à la réception et demande de consulter les inscriptions à ses Services.<br>
+         &nbsp; 2. Agent utilise le Répertoire pour trouver la Séance liée au Service.<br>
+         &nbsp; 3. Agent montre les inscriptions au Service à l'Utilisateur.<br>
+         Scénarios alternatifs :<br>
+         &nbsp; 2.a. Professionnel n'offre aucun Service :<br>
+		   &nbsp; &nbsp; 2.a.1. Agent explique au professionnel qu'il n'offre présentement aucun service.<br>
+         &nbsp; &nbsp; 2.a.2. Fin du scénario<br>
+         Postconditions : Le professionnel obtient une liste des inscriptions au Service demandé.<br>
+      </p>
+      <p>
+         <font size="3"><strong>Cas d’utilisation #10 : Mettre à jour un Service.</strong></font><br>
+         But : Un Utilisateur veut changer les informations d'un de ses Services.<br>
+         Préconditions : L'Utilisateur est préalablement inscrit au #GYM en tant que Profesionnel. Le numéro d'Utilisateur a préalablement été validé. L'Utilisateur a au moins un Service d'enregistré dans le Centre des Données.<br>
+         Acteurs : Utilisateur (principal), Agent à la réception (secondaire).<br>
+         Scénario principal : <br>
+         &nbsp; 1. Utilisateur est à la réception et veut modifier les informations de son Service.<br>
+		   &nbsp; 2. Agent utilise le Répertoire pour trouver le Service.<br>
+		   &nbsp; 3. Agent demande qu'elles informations le professionnel veut modifier.<br>
+         &nbsp; 4. Agent modifie les informations du Service.<br>
+         &nbsp; 5. Agent enregistre les informations dans le Centre de Donnés.<br>
+         Postconditions : Les informations du Service sont modifiées dans le Centre des Données. Les Utilisateurs inscrits seront avisés des modifications dès leur prochaine visite au #GYM.<br>
+      </p>
+      <p>
+         <font size="3"><strong>Cas d’utilisation #11 : Supprimer un Service.</strong></font><br>
+         But : Un Utilisateur veut supprimer un Service.<br>
+         Préconditions : L'Utilisateur est préalablement inscrit au #GYM en tant que Profesionnel. Le numéro d'Utilisateur a préalablement été validé. L'Utilisateur a au moins un Service d'enregistré dans le Centre des Données.<br>
+         Acteurs : Utilisateur (principal), Agent à la réception (secondaire).<br>
+         Scénario principal : <br>
+         &nbsp; 1. Utilisateur est à la réception et veut supprimer son Service.<br>
+         &nbsp; 2. Agent utilise le Répertoire pour trouver le Service.<br>
+         &nbsp; 3. Agent confirme la suppression à l'Utilisateur.<br>
+         Postconditions : Le Service est supprimé du Centre des Données. Les membres qui étaient inscrits seront avisés que le Service est annulé dès leur prochaine visite au #GYM.<br>
+      </p>
+      <p>
+         <font size="3"><strong>Cas d’utilisation #12 : Générer procédure comptable.</strong></font><br>
+         But : On veut connaître le montant des frais de services engendrés par les Professionnels durant la dernière semaine.<br>
+         Préconditions : Il y a eu au moins un Service de donné durant la dernière semaine.<br>
+         Acteurs : Gestionnaire (principal), Système (secondaire).<br>
+         Scénario principal : <br>
+         &nbsp; 1. Il est vendredi minuit, la procédure comptable est lancée automatiquement par le Système.<br>   
+         &nbsp; 2. Le rapport du Gestionnaire et les TEFs sont générés et écris sur le disque. <br>   
+         Scénarios alternatifs :<br>
+         &nbsp; 1.a. Le Gestionnaire lance la procédure comptable.<br>   
+         &nbsp; 1.a.1. Un rapport est créé avec les informations nécessaires sur le disque.<br>         
+         Postconditions : Le rapport est enregistré sur le disque.<br>
+      </p>
+
+      <h4>Risques</h4>
+      <p>
+      <ol>
+         <li><strong>Risque sévère : Confidentialité des données.</strong><br>
+            L'exposition des données apporte un enjeu important lors de l'utilisation du logiciel. Il faudrait
+            peut-être mettre en place une procédure d'authentification pour les Agents du #GYM.
+         </li>
+         <br>
+         <li><strong>Risque important : Utilisation du logiciel par les Agents du #GYM.</strong><br>
+            L'utilisation du logiciel par les Agents doit être rapide et efficace, sinon l'attente pour chacun
+            des Utilisateurs risque de ne pas être plaisante.
+         </li>
+         <br>
+         <li><strong>Risque important : Identification du membre/professionnel.</strong><br>
+            L'idenfitication de l'Utilisateur est au centre du logiciel. Si cette étape n'est pas rapide,
+            chaque demandes à l'Agent prendra un temps considérable et on ne veut pas ça. On doit donc optimiser
+            cette étape.
+         </li>
+         <br>
+         <li><strong>Risque important : Gestion des horaires/conflits.</strong><br>
+            On doit va devoir vérifier plusieurs facteurs relatifs aux conflits d'horaires. Exemple, un professionnel
+            ne peut pas offrir deux Services en même temps, un Service ne peut pas avoir lieu hors des heures
+            d'ouverture du #GYM, etc.
+         </li>
+         <br>
+         <li><strong>Risque éloigné : Évolutivité du logiciel.</strong><br>
+            La structure du code devra permettre une évolution et une bonne maintenabilité de celui-ci. Le 
+            #GYM voudra probablement ajouter rapidement de nouvelles fonctionnalités au logiciel.
+         </li>
+      </ol>
+      </p>
+      
+      <h4>Exigences non-fonctionnelles :</h4>
+      <p>
+      <ol>
+         <li><strong>Implémentation : Java.</strong><br>
+            Malgré le fait que ce langage nous est imposé, cela reste un besoin non fonctionnel, car on aurait 
+            bien pu implémenter le logiciel dans un tout autre langage et obtenir le même résultat. Cependant,
+            puisque Java est connu de tous les membres de l'équipe, ce langage facilite grandement les choses.
+         </li>
+         <br>
+         <li><strong>Performance : Temps de réponse du logiciel adéquat pour chacune des requêtes.</strong><br>
+            Le #GYM devra répondre à beaucoup de demandes de la part des Utilisateurs (membres et professionnels).
+            Il est important que le temps d'attente soit raisonnable pour éviter une d'attente.
+         </li>
+         <br>
+         <li><strong>Facilité d'utilisation : Fournir un guide d'utilisation.</strong><br>
+            Le logiciel étant dans ses débuts ne sera pas évident d'utilisation par les Agents du #GYM. Une 
+            brève description de ce qu'on peut accomplir avec le logiciel et aussi de comment l'accomplir ne
+            ferait pas de tord.
+         </li>
+         <br>
+         <li><strong>Compatibilité : Selon les postes disponibles au #GYM.</strong><br>
+            Nous n'avons aucune information sur le type de postes disponibles pour les Agents du #GYM. Il faudra
+            faire en sorte que notre logiciel soit compatible sur la majorité des plateformes.
+         </li>
+         <br>
+         <li><strong>Fiabilité : Perte de données non acceptable, gestion de beaucoup de données.</strong><br>
+            Il y aura forcément beaucoup roulement de membres et de professionnels dans le logiciel du #GYM.
+            Notre logiciel doit être fiable, sauvegarder fréquemment les informations des Utilisateurs et
+            permettre de gérer beaucoup de données. Des procédures de « backup » devraient être en place.
+         </li>
+      </ol>
+      </p>
+
+		<h3>WorkFlow d'analyse:</h3> 
+		      <p>
+      <ol>
+         <li>
+            Principal :
+            <p>
+               <img src="./analyse/principal.png"  alt="diagramme_act_principal" /><br><br>
+               Voici un <a href="./analyse/diagramme_act_principal.vpp">lien</a> vers le fichier vpp du diagramme.
+            </p>
+         </li>
+         <li>
+            Ajouter/modifier/supprimer un membre : 
+            <p>
+               <img src="./analyse/membre.png"  alt="diagramme_act_membre" /><br><br>
+               Voici un <a href="./analyse/diagramme_act_membre.vpp">lien</a> vers le fichier vpp du diagramme.
+            </p>
+         </li>
+         <li>
+            Ajouter/modifier/supprimer un service :
+            <p>
+               <img src="./analyse/service.png"  alt="diagramme_act_service" /><br><br>
+               Voici un <a href="./analyse/diagramme_act_service.vpp">lien</a> vers le fichier vpp du diagramme.
+            </p>
+         </li>
+         <li>
+            Inscription à une séance :
+            <p>
+               <img src="./analyse/inscription.png"  alt="diagramme_act_inscription" /><br><br>
+               Voici un <a href="./analyse/diagramme_act_inscription.vpp">lien</a> vers le fichier vpp du diagramme.
+            </p>
+         </li>
+         <li>
+            Confirmer séance :
+            <p>
+               <img src="./analyse/participation.png"  alt="diagramme_act_participation" /><br><br>
+               Voici un <a href="./analyse/diagramme_act_participation.vpp">lien</a> vers le fichier vpp du diagramme.
+            </p>
+         </li>
+         <li>
+            Procédure comptable :
+            <p>
+               <img src="./analyse/comptable.png"  alt="diagramme_act_comptable" /><br><br>
+               Voici un <a href="./analyse/diagramme_act_comptable.vpp">lien</a> vers le fichier vpp du diagramme.
+            </p>
+         </li>
+      </ol>
+		
+        </p>
+		<h3>WorkFlow de conception:</h3> 
+		<p>
+         <img src="./conception/diagramme_classe.png"  alt="diagramme_classe" /><br><br>
+         Voici un <a href="./conception/diagramme_classe.vpp">lien</a> vers le fichier vpp du diagramme.
+      </p>
+		<p>
+		<ol>
+         <li>Ajouter/modifier/supprimer un membre :
+            <p>
+               <img src="./conception/diagramme_seq_membre_DEV3.png"  alt="diagramme_seq_membre" /><br><br>
+               Voici un <a href="./conception/diagramme_seq_membre_DEV3.vpp">lien</a> vers le fichier vpp du diagramme.
+            </p>
+         </li>
+         <li>Ajouter/modifier/supprimer un service :
+            <p>
+               <img src="./conception/diagramme_seq_service_DEV3.png"  alt="diagramme_seq_service" /><br><br>
+               Voici un <a href="./conception/diagramme_seq_service_DEV3.vpp">lien</a> vers le fichier vpp du diagramme.
+            </p>
+         </li>
+         <li>Inscription à une séance :
+            <p>
+               <img src="./conception/diagramme_seq_inscription_DEV3.png"  alt="diagramme_seq_inscription" /><br><br>
+               Voici un <a href="./conception/diagramme_seq_inscription_DEV3.vpp">lien</a> vers le fichier vpp du diagramme.
+            </p>
+         </li>
+         <li>Confirmer séance :
+            <p>
+               <img src="./conception/diagramme_seq_participation_DEV3.png"  alt="diagramme_seq_participation" /><br><br>
+               Voici un <a href="./conception/diagramme_seq_participation_DEV3.vpp">lien</a> vers le fichier vpp du diagramme.
+            </p>
+         </li>
+         <li>Procédure comptable :
+            <p>
+               <img src="./conception/diagramme_seq_comptable_DEV3.png"  alt="diagramme_seq_comptable" /><br><br>
+               Voici un <a href="./conception/diagramme_seq_comptable_DEV3.vpp">lien</a> vers le fichier vpp du diagramme.
+            </p>
+         </li>
+      </ol>
+        </p>
+     <h2>Statistiques BitBucket:</h2>
+         <p>
+		 <img src="stats_bit_bucket_devoir3.png"  alt="statistiques" />
+        </p>
+
+   </body>
+</html>

@@ -25,7 +25,11 @@ public class main {
 			      System.out.println(itr.next()); 
 			  } 
 			System.out.println("Nombre de lignes de codes du fichier : " + classe_LOC(l));
+<<<<<<< HEAD
 			System.out.println("Nombre de lignes de commentaires du fichier : " + classe_CLOC(l));
+=======
+			
+>>>>>>> main
 			
 		}
     }
@@ -45,6 +49,7 @@ public class main {
 	    return lines; 
 	  } 
 	
+<<<<<<< HEAD
 	public static int classe_CLOC(List<String> list) {
 		int count = 0;
 		for (String temp : list) {
@@ -57,6 +62,11 @@ public class main {
 	}
 	
 	
+=======
+	public static void commentLinesCount(String fileName) {
+		
+	}
+>>>>>>> main
 	public static int classe_LOC(List list) {
 		return list.size();
 	}

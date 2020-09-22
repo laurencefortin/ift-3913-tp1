@@ -24,6 +24,9 @@ public class main {
 			while (itr.hasNext()) {
 			      System.out.println(itr.next()); 
 			  } 
+			System.out.println("Nombre de lignes de codes du fichier : " + classe_LOC(l));
+			
+			
 		}
     }
 	
@@ -33,18 +36,23 @@ public class main {
 	    List<String> lines = Collections.emptyList(); 
 	    try
 	    { 
-	      lines = 
-	       Files.readAllLines(Paths.get(fileName), StandardCharsets.UTF_8); 
+	      lines = Files.readAllLines(Paths.get(fileName), StandardCharsets.UTF_8); 
 	    } 
 	  
 	    catch (IOException e) 
 	    { 
-	  
-	      // do something 
+	    	 
 	      e.printStackTrace(); 
 	    } 
 	    return lines; 
 	  } 
+	
+	public static void commentLinesCount(String fileName) {
+		
+	}
+	public static int classe_LOC(List list) {
+		return list.size();
+	}
 
 
 }

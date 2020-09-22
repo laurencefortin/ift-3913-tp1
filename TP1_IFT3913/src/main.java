@@ -25,20 +25,18 @@ public class main {
 			      System.out.println(itr.next()); 
 			  } 
 			System.out.println("Nombre de lignes de codes du fichier : " + classe_LOC(l));
-			
+			System.out.println("Nombre de lignes de commentaires du fichier : " + classe_CLOC(l));
 			
 		}
     }
 	
 	public static List<String> readFileInList(String fileName) 
 	  { 
-	  
 	    List<String> lines = Collections.emptyList(); 
 	    try
 	    { 
 	      lines = Files.readAllLines(Paths.get(fileName), StandardCharsets.UTF_8); 
 	    } 
-	  
 	    catch (IOException e) 
 	    { 
 	    	 
@@ -47,9 +45,18 @@ public class main {
 	    return lines; 
 	  } 
 	
-	public static void commentLinesCount(String fileName) {
-		
+	public static int classe_CLOC(List<String> list) {
+		int count = 0;
+		for (String temp : list) {
+			if(temp.contains("//"))
+			{
+				count++;
+			}	
+        }
+		return count;
 	}
+	
+	
 	public static int classe_LOC(List list) {
 		return list.size();
 	}

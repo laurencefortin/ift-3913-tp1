@@ -1,5 +1,0 @@
-numero, prenom, nom, estProfessionnel, courriel, adresse, ville, province, codePostal, balance, 
-000000003, franky, comeau, true, franky.comeau@hotmail.com, 123 rue des beaux, chicoutimi, qc, j3l 1v2, 99, 
-000000002, Julien, Lanctot, true, juju@gmail.com, 123 43e, Laval, qc, H7N 0B8, 0, 
-000000001, laurence, fortin, false, laurence@umontreal.com, 801 21eme, laval, qc, H7N 0B8, 99, 
-000000004, Olivier, Provost, false, olivier.provost@umontreal.ca, 1234 Esplanade, Montréal, QC, H2T 2Z5, 0, 

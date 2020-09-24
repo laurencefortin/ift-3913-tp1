@@ -10,8 +10,8 @@ import java.util.List;
 
 import javax.swing.JFrame;
 
-public class main {
-	
+public class TP {
+	public static boolean inComment = false;
 	public static void main(String[] args) throws IOException {
 		FileDialog fd = new FileDialog(new JFrame());
 		fd.setVisible(true);
@@ -26,6 +26,7 @@ public class main {
 			  } 
 			System.out.println("Nombre de lignes de codes du fichier : " + classe_LOC(l));
 			System.out.println("Nombre de lignes de commentaires du fichier : " + classe_CLOC(l));
+			
 		}
     }
 	
@@ -44,11 +45,15 @@ public class main {
 	    return lines; 
 	  } 
 	
-	public static int classe_CLOC(List<String> list) {
+	public static int classe_CLOC(List<String> list) 
+	{
 		int count = 0;
 		for (String temp : list) {
-			if(temp.contains("//"))
+			if(inComment)
+			
+			if(temp.contains("//")) 
 			{
+				inComment = true;
 				count++;
 			}	
         }

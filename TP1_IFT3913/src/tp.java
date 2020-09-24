@@ -13,19 +13,30 @@ import javax.swing.JFrame;
 
 public class tp {
 	public static boolean inComment = false;
-	public static void main(String[] args) throws IOException {
-		
-		
+	public static void main(String[] args) throws IOException 
+	{		
 		JFileChooser fc = new JFileChooser();
 		fc.setCurrentDirectory(new java.io.File(".")); // start at application current directory
 		fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		int returnVal = fc.showDialog(null, "Choisir un dossier");
-		if(returnVal == JFileChooser.APPROVE_OPTION) {
+		if(returnVal == JFileChooser.APPROVE_OPTION) 
+		{
 		    File yourFolder = fc.getSelectedFile();
-		    System.out.println(yourFolder);
-			}
-
+		    File[] directoryListing = yourFolder.listFiles();
+		    if (directoryListing != null) {
+		      for (File child : directoryListing) {
+		    	  List l = readFileInList(child.getAbsolutePath()); 
+		    	  Iterator<String> itr = l.iterator(); 
+		    	  while (itr.hasNext()) {
+		    		  	 System.out.println(itr.next());
+		    	  } 
+		    	  System.out.println("Nombre de lignes de codes du fichier : " + classe_LOC(l));
+		    	  System.out.println("Nombre de lignes de commentaires du fichier : " + classe_CLOC(l));		    	  			
+		      }
+		    } 
 		}
+
+	}
 	
 	
 	
@@ -33,7 +44,7 @@ public class tp {
 //		FileDialog fd = new FileDialog(new JFrame());
 //		fd.setVisible(true);
 //		File[] f = fd.getFiles();
-/*		if(f.length > 0) {
+	/*	if(f.length > 0) {
 			
 		    System.out.println(fd.getFiles()[0].getAbsolutePath());
 		    List l = readFileInList(fd.getFiles()[0].getAbsolutePath()); 

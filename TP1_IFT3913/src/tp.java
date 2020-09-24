@@ -7,12 +7,14 @@ import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-
+import java.util.regex.*;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
+
 public class tp {
 	public static boolean inComment = false;
+	public static boolean inMethod = false;
 	public static void main(String[] args) throws IOException 
 	{		
 		JFileChooser fc = new JFileChooser();
@@ -31,32 +33,14 @@ public class tp {
 		    		  	 System.out.println(itr.next());
 		    	  } 
 		    	  System.out.println("Nombre de lignes de codes du fichier : " + classe_LOC(l));
-		    	  System.out.println("Nombre de lignes de commentaires du fichier : " + classe_CLOC(l));		    	  			
+		    	  System.out.println("Nombre de lignes de commentaires du fichier : " + classe_CLOC(l));
+		    	  System.out.println("Nombre de methodes du fichier : " + methode_LOC(l));
 		      }
 		    } 
 		}
 
 	}
 	
-	
-	
-	
-//		FileDialog fd = new FileDialog(new JFrame());
-//		fd.setVisible(true);
-//		File[] f = fd.getFiles();
-	/*	if(f.length > 0) {
-			
-		    System.out.println(fd.getFiles()[0].getAbsolutePath());
-		    List l = readFileInList(fd.getFiles()[0].getAbsolutePath()); 
-			Iterator<String> itr = l.iterator(); 
-			while (itr.hasNext()) {
-			      System.out.println(itr.next()); 
-			  } 
-			System.out.println("Nombre de lignes de codes du fichier : " + classe_LOC(l));
-			System.out.println("Nombre de lignes de commentaires du fichier : " + classe_CLOC(l));
-			
-		}
-    }*/
 	
 	public static List<String> readFileInList(String fileName) 
 	  { 
@@ -86,6 +70,35 @@ public class tp {
 		return count;
 	}
 	
+	public static int methode_LOC(List<String> list) {
+		String regex = ".*(public|protected|private|static|\\s) +[\\w\\<\\>\\[\\],\\s]+\\s+(\\w+) *\\([^\\)]*\\) *(\\{?|[^;])";
+		int count = 0;
+		int countAcco = 0;
+		for (String temp : list) {
+		if(!inMethod)
+			if(temp.matches(regex)) 
+			{
+				
+				count++;
+				//inMethod = true;
+				countAcco++;
+			}
+		/*else
+		{
+			count++;
+			
+			if(!temp.contains("}") && temp.contains("{"))
+			{
+				
+			}
+			if(temp.contains("}") && !temp.contains("{"))
+			{
+				
+			}
+		}*/
+        }
+		return count;
+	}
 	
 	public static int classe_LOC(List list) {
 		return list.size();

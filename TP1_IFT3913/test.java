@@ -1,4 +1,3 @@
-package org.ift2255.devoir3;
 /**
 * La classe Main du #GYM, est une application qui permet de gérer le fonctionnement d'un Gym.
 *

@@ -8,15 +8,32 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
 public class tp {
 	public static boolean inComment = false;
 	public static void main(String[] args) throws IOException {
-		FileDialog fd = new FileDialog(new JFrame());
-		fd.setVisible(true);
-		File[] f = fd.getFiles();
-		if(f.length > 0) {
+		
+		
+		JFileChooser fc = new JFileChooser();
+		fc.setCurrentDirectory(new java.io.File(".")); // start at application current directory
+		fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		int returnVal = fc.showDialog(null, "Choisir un dossier");
+		if(returnVal == JFileChooser.APPROVE_OPTION) {
+		    File yourFolder = fc.getSelectedFile();
+		    System.out.println(yourFolder);
+			}
+
+		}
+	
+	
+	
+	
+//		FileDialog fd = new FileDialog(new JFrame());
+//		fd.setVisible(true);
+//		File[] f = fd.getFiles();
+/*		if(f.length > 0) {
 			
 		    System.out.println(fd.getFiles()[0].getAbsolutePath());
 		    List l = readFileInList(fd.getFiles()[0].getAbsolutePath()); 
@@ -28,7 +45,7 @@ public class tp {
 			System.out.println("Nombre de lignes de commentaires du fichier : " + classe_CLOC(l));
 			
 		}
-    }
+    }*/
 	
 	public static List<String> readFileInList(String fileName) 
 	  { 

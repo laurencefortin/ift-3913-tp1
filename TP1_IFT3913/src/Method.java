@@ -37,23 +37,67 @@ public class Method {
 				
 				else if (inMethod == true)
 				{
-					this.contentMethod.add(temp);
-					if(!temp.contains("}") && temp.contains("{"))
-					{
-						countAcco++;
-					}
-					if(temp.contains("}") && !temp.contains("{"))
-					{
-						countAcco--;
-					}
-					if(countAcco == 0)
-					{
-						inMethod = false;
-						return;
+					if(!temp.equals(""))
+					{		
+						this.contentMethod.add(temp);
+						if(!temp.contains("}") && temp.contains("{"))
+						{
+							countAcco++;
+						}
+						if(temp.contains("}") && !temp.contains("{"))
+						{
+							countAcco--;
+						}
+						if(countAcco == 0)
+						{
+							inMethod = false;
+							return;
+						}
 					}
 				}
 			}
 		}
+		
+		public int methode_LOC()
+		{
+			return contentMethod.size();
+		}
+		
+		public int methode_CLOC()
+		{
+			int count = 0;
+			boolean inComment = false;
+			for (String temp : contentMethod) 
+			{
+				if(!inComment)
+				{
+						
+					if(temp.contains("//")) 
+					{
+						count++;
+					}	
+					if(temp.contains("/*") || temp.contains("/**"))
+					{
+						count++;
+						inComment = true;
+					}
+					if(temp.contains("*/"))
+					{
+						inComment = false;
+					}
+				}
+				else
+				{
+					count++;
+					if(temp.contains("*/"))
+					{
+						inComment = false;
+					}
+				}
+	        }
+			return count;
+		}
+		
 		
 		public void findCommentsBefore()
 		{
@@ -78,7 +122,6 @@ public class Method {
 					{
 						if(current.equals(""))
 						{
-							commentsBeforeMethod.add(current);
 							current = listIterator.previous();
 						}
 						
@@ -129,6 +172,7 @@ public class Method {
 				
 			}
 		}
+
 
 		public String getSignature() {
 			return signature;

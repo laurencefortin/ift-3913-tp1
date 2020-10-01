@@ -1,12 +1,14 @@
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 public class Method {
 		private String signature;
 		private String line;
 		private List<String>  file;
 		private List<String> contentMethod;
+		private List<String> commentsBeforeMethod;
 		
 		public Method(String name, String line, List<String> fileContent)
 		{
@@ -14,7 +16,7 @@ public class Method {
 			this.line = line;
 			this.file = fileContent;
 			this.contentMethod = new ArrayList<String>();
-			
+			this.commentsBeforeMethod = new ArrayList<String>();
 		}
 		
 		public void findMethodContent()
@@ -23,24 +25,18 @@ public class Method {
 			boolean inMethod = false;
 			for (String temp : this.file)
 			{
-				System.out.println(temp);
-				System.out.println(line);
 				if(temp.equals(line))
 				{
 					this.contentMethod.add(temp);
-					System.out.println("test4");
 					inMethod = true;
 					if(temp.contains("{"))
 					{
 						countAcco++;
 					}
-					System.out.println(countAcco);
 				}
 				
 				else if (inMethod == true)
 				{
-					System.out.println(countAcco);
-					System.out.println("test3");
 					this.contentMethod.add(temp);
 					if(!temp.contains("}") && temp.contains("{"))
 					{
@@ -53,27 +49,106 @@ public class Method {
 					if(countAcco == 0)
 					{
 						inMethod = false;
-					System.out.println("ICI MON CHUM" + this.contentMethod);
 						return;
 					}
 				}
 			}
 		}
+		
+		public void findCommentsBefore()
+		{
+			boolean inComment = false;
+			boolean beforeMethod = false;
+			boolean onlyEmpty = true;
+			ListIterator<String> listIterator = file.listIterator(file.size());
+			String current = listIterator.previous();
+			while (listIterator.hasPrevious()) 
+			{
+				if(current.equals(line))
+				{
+					current = listIterator.previous();
+					beforeMethod = true;
+				}
+				
+
+				if(beforeMethod)
+				{
+					System.out.println(current);
+					if(!inComment)
+					{
+						if(current.equals(""))
+						{
+							commentsBeforeMethod.add(current);
+							current = listIterator.previous();
+						}
+						
+						else if(current.contains("//"))
+						{
+							if(onlyEmpty = true)
+							{
+								onlyEmpty = false;
+							}
+							commentsBeforeMethod.add(current);
+							current = listIterator.previous();
+						}
+						
+						else if(current.contains("*/"))
+						{
+							if(onlyEmpty = true)
+							{
+								onlyEmpty = false;
+							}
+							inComment = true;
+							commentsBeforeMethod.add(current);
+							current = listIterator.previous();
+						}
+						else
+						{
+							if(onlyEmpty)
+							{
+								commentsBeforeMethod.clear();
+							}
+							return;
+						}
+					}
+					else
+					{
+						if(current.contains("/**") || current.contains("/*"))
+						{
+							commentsBeforeMethod.add(current);
+							return;
+						}
+						commentsBeforeMethod.add(current);
+						current = listIterator.previous();
+					}
+		
+				}
+				else {
+					current = listIterator.previous();
+				}
+				
+			}
+		}
 
 		public String getSignature() {
-			return this.signature;
+			return signature;
 		}
 
 		public String getLine() {
-			return this.line;
+			return line;
 		}
 
 		public List<String> getFile() {
-			return this.file;
+			return file;
 		}
 
 		public List<String> getContentMethod() {
-			return this.contentMethod;
+			return contentMethod;
 		}
+
+		public List<String> getCommentsBeforeMethod() {
+			return commentsBeforeMethod;
+		}
+
 		
 }

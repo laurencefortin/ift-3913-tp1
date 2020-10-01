@@ -95,7 +95,7 @@ public class Method {
 					}
 				}
 	        }
-			return count;
+			return count + commentsBeforeMethod.size();
 		}
 		
 		

@@ -30,31 +30,7 @@ public class tp {
 		{
 		    File yourFolder = fc.getSelectedFile();
 		    File[] directoryListing = yourFolder.listFiles();
-		    if (directoryListing != null) {
-		      for (File child : directoryListing) 
-		      {
-		    	  List<Method>  test = new ArrayList();
-		    	  List<String> l = readFileInList(child.getAbsolutePath()); 
-		    	  System.out.println("Nombre de lignes de commentaires du fichier : " + classe_CLOC(l));
-		    	  System.out.println("Nombre de lignes de codes du fichier : " + classe_LOC(l));
-		    	  List<Method> abc = findMethods(l, test);
-		    	  if(abc.size() > 0)
-		    	  {
-							
-		    	  }
-			    	  for(Method methode : abc)
-			    	  {
-			    		System.out.println(methode.getSignature());
-			    		System.out.println(methode.getLine());
-			    	    methode.findMethodContent();
-			    	    methode.findCommentsBefore();
-			    	    System.out.println("Nombre de lignes de commentaires de la methode : " + methode.methode_CLOC());
-			    	    System.out.println("Nombre de lignes de code de la methode : " + methode.methode_LOC());
-			    	    System.out.println("testcc : " + methode.CC());
-			   
-			    	  }
-		    	  }
-		      }
+		    iterateOnFiles(directoryListing);
 		    } 
 		}
 
@@ -140,6 +116,40 @@ public class tp {
 		return list.size();
 
 	}
-
+	public static void iterateOnFiles(File[] directoryListing) {
+		if (directoryListing != null) {
+		      for (File child : directoryListing) 
+		      {
+		    	  if(!child.isDirectory())
+		    	  {
+			    	  List<Method>  test = new ArrayList();
+			    	  List<String> l = readFileInList(child.getAbsolutePath()); 
+			    	  System.out.println("Nombre de lignes de commentaires du fichier : " + classe_CLOC(l));
+			    	  System.out.println("Nombre de lignes de codes du fichier : " + classe_LOC(l));
+			    	  List<Method> abc = findMethods(l, test);
+			    	  if(abc.size() > 0)
+			    	  {
+								
+			    	  }
+				    	  for(Method methode : abc)
+				    	  {
+				    		System.out.println(methode.getSignature());
+				    		System.out.println(methode.getLine());
+				    	    methode.findMethodContent();
+				    	    methode.findCommentsBefore();
+				    	    System.out.println("Nombre de lignes de commentaires de la methode : " + methode.methode_CLOC());
+				    	    System.out.println("Nombre de lignes de code de la methode : " + methode.methode_LOC());
+				    	    System.out.println("testcc : " + methode.CC());
+				   
+				    	  }
+			    }
+		    	  else
+		    	  {
+		  		    iterateOnFiles(child.listFiles());
+		    	  }
+		      }
+		      }
+	}
+	
 
 }

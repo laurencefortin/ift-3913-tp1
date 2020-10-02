@@ -50,6 +50,8 @@ public class tp {
 			    	    methode.findCommentsBefore();
 			    	    System.out.println("Nombre de lignes de commentaires de la methode : " + methode.methode_CLOC());
 			    	    System.out.println("Nombre de lignes de code de la methode : " + methode.methode_LOC());
+			    	    System.out.println("testcc : " + methode.CC());
+			   
 			    	  }
 		    	  }
 		      }

@@ -175,6 +175,37 @@ public class Method {
 			}
 		}
 
+		
+		public int CC()
+		{
+			String regex = "(if|else|else if|do-while|while)\\s*\\(((?:[^\\(\\)]|\\(\\))*)\\)\\s*";
+			int count = 1;
+			int returnBeforeEnd = 0;
+			for (String temp : contentMethod) 
+			{
+				if(temp.contains("return"))
+				{
+					returnBeforeEnd++;
+				}
+				if(temp.matches(regex))
+				{
+					count++;
+					if(temp.contains("&&"))
+					{
+						count++;
+					}
+					if(temp.contains("||"))
+					{
+						count++;
+					}
+					
+				}
+				
+			}
+			
+			return count;
+		}
+		
 
 		public String getSignature() {
 			return signature;

@@ -37,7 +37,7 @@ public class Method {
 				
 				else if (inMethod == true)
 				{
-					if(!temp.equals(""))
+					if(temp != null && !temp.trim().isEmpty())
 					{		
 						this.contentMethod.add(temp);
 						if(!temp.contains("}") && temp.contains("{"))
@@ -88,7 +88,10 @@ public class Method {
 				}
 				else
 				{
-					count++;
+					if(temp != null && !temp.trim().isEmpty())
+					{
+						count++;
+					}
 					if(temp.contains("*/"))
 					{
 						inComment = false;
@@ -117,10 +120,9 @@ public class Method {
 
 				if(beforeMethod)
 				{
-					System.out.println(current);
 					if(!inComment)
 					{
-						if(current.equals(""))
+						if(current == null || current.trim().isEmpty())
 						{
 							current = listIterator.previous();
 						}

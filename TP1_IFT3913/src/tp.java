@@ -35,9 +35,8 @@ public class tp {
 		      {
 		    	  List<Method>  test = new ArrayList();
 		    	  List<String> l = readFileInList(child.getAbsolutePath()); 
-		    	  
-		    	  System.out.println("Nombre de lignes de codes du fichier : " + classe_LOC(l));
 		    	  System.out.println("Nombre de lignes de commentaires du fichier : " + classe_CLOC(l));
+		    	  System.out.println("Nombre de lignes de codes du fichier : " + classe_LOC(l));
 		    	  List<Method> abc = findMethods(l, test);
 		    	  if(abc.size() > 0)
 		    	  {
@@ -45,14 +44,12 @@ public class tp {
 		    	  }
 			    	  for(Method methode : abc)
 			    	  {
-			    	    //System.out.println(methode.getSignature());
-			    	   // System.out.println(methode.getLine());
-			    	  /*  Iterator<String> itr = l.iterator(); 
-				    	  while (itr.hasNext()) {
-				    		  	 System.out.println(itr.next());
-				    	  } */
+			    		System.out.println(methode.getSignature());
+			    		System.out.println(methode.getLine());
 			    	    methode.findMethodContent();
-			    	  //  System.out.println(methode.getContentMethod());
+			    	    methode.findCommentsBefore();
+			    	    System.out.println("Nombre de lignes de commentaires de la methode : " + methode.methode_CLOC());
+			    	    System.out.println("Nombre de lignes de code de la methode : " + methode.methode_LOC());
 			    	  }
 		    	  }
 		      }
@@ -80,12 +77,37 @@ public class tp {
 	public static int classe_CLOC(List<String> list) 
 	{
 		int count = 0;
-		for (String temp : list) {
-			if(temp.contains("//")) 
+		boolean inComment = false;
+		for (String temp : list) 
+		{
+			if(!inComment)
 			{
-				inComment = true;
-				count++;
-			}	
+					
+				if(temp.contains("//")) 
+				{
+					count++;
+				}	
+				if(temp.contains("/*") || temp.contains("/**"))
+				{
+					count++;
+					inComment = true;
+				}
+				if(temp.contains("*/"))
+				{
+					inComment = false;
+				}
+			}
+			else
+			{
+				if(temp != null && !temp.trim().isEmpty())
+				{
+					count++;
+				}
+				if(temp.contains("*/"))
+				{
+					inComment = false;
+				}
+			}
         }
 		return count;
 	}
@@ -98,13 +120,23 @@ public class tp {
 			{
 				String methodSplit[] = StringUtils.substringBetween(temp, "", "(").split(" ");
 				test.add(new Method(methodSplit[methodSplit.length - 1], temp, list));
-				}
+			}
         }		
 		return test;
 	}
 	
-	public static int classe_LOC(List list) {
+	public static int classe_LOC(List<String> list) {
+		
+		System.out.println(list.size());
+		Iterator<String> iter = list.iterator();
+		while (iter.hasNext()) {
+		    String str = iter.next();
+		    if (str == null || str.trim().isEmpty())
+		        iter.remove();
+		}
+
 		return list.size();
+
 	}
 
 

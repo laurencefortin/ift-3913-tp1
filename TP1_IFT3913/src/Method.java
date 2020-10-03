@@ -16,7 +16,9 @@ public class Method {
 			this.line = line;
 			this.file = fileContent;
 			this.contentMethod = new ArrayList<String>();
+			findMethodContent();
 			this.commentsBeforeMethod = new ArrayList<String>();
+			findCommentsBefore();
 		}
 		
 		public void findMethodContent()

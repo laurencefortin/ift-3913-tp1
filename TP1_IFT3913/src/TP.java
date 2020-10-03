@@ -4,10 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFileChooser;
 
-
-
-
-public class tp {
+public class TP {
 	
 	private List<Classe> classes = new ArrayList<Classe>();
 	
@@ -27,12 +24,6 @@ public class tp {
 		    } 
 		}
 
-	
-	
-	
-	
-	
-	
 	public void iterateOnFiles(File[] directoryListing) {
 		if (directoryListing != null) {
 		      for (File child : directoryListing) 
@@ -48,7 +39,7 @@ public class tp {
 			    	  {
 								
 			    	  }
-				    	  for(Method methode : temp.getMethods())
+				    	  for(Methode methode : temp.getMethods())
 				    	  {
 				    		System.out.println(methode.getSignature());
 				    		System.out.println(methode.getLine());

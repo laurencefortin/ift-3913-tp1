@@ -1,16 +1,15 @@
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-public class Method {
+public class Methode {
 		private String signature;
 		private String line;
 		private List<String>  file;
 		private List<String> contentMethod;
 		private List<String> commentsBeforeMethod;
 		
-		public Method(String name, String line, List<String> fileContent)
+		public Methode(String name, String line, List<String> fileContent)
 		{
 			this.signature = name;
 			this.line = line;
@@ -182,7 +181,7 @@ public class Method {
 		{
 			String regex = "(if|else|else if|do-while|while)\\s*\\(((?:[^\\(\\)]|\\(\\))*)\\)\\s*";
 			int count = 1;
-			int returnBeforeEnd = 0;
+			int returnBeforeEnd = 0;//variable sert a quoi??
 			for (String temp : contentMethod) 
 			{
 				if(temp.contains("return"))
@@ -200,15 +199,11 @@ public class Method {
 					{
 						count++;
 					}
-					
 				}
-				
 			}
-			
 			return count;
 		}
 		
-
 		public String getSignature() {
 			return signature;
 		}

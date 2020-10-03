@@ -85,7 +85,6 @@ public class Classe {
 		{
 			if(!inComment)
 			{
-					
 				if(temp.contains("//")) 
 				{
 					count++;

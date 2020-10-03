@@ -75,7 +75,7 @@ public class CSV {
 		             
 		            //Write a new student object list to the CSV file
 		            for (Methode methode : ListeMethode.values()) {
-		                fileWriter.append(String.valueOf(methode)); // class Path
+		                fileWriter.append(String.valueOf(methode)); // class Path (SIGNATURE?)
 		                fileWriter.append(COMMA_DELIMITER);
 		                fileWriter.append(String.valueOf(methode)); // class name
 		                fileWriter.append(COMMA_DELIMITER);

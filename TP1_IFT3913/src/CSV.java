@@ -16,7 +16,10 @@ public class CSV {
 		Map<Integer, Methode> ListeMethode = new HashMap<>();
 		
 		
-		    
+		  /**
+		   * permet d'ecrire le csv de classe 
+		   * @return un fichier csv creer remplis d'informations sur les classes
+		   * */ 
 		    public void ecrireClasse(){
 
 				String fileName = "classes.csv";
@@ -33,7 +36,7 @@ public class CSV {
 		             
 		            //Write a new student object list to the CSV file
 		            for (Classe classe : ListeClasse.values()) {
-		                fileWriter.append(String.valueOf(classe)); // class Path
+		                fileWriter.append(String.valueOf(classe.getFullFile().getAbsolutePath())); // class Path
 		                fileWriter.append(COMMA_DELIMITER);
 		                fileWriter.append(String.valueOf(classe)); // class name
 		                fileWriter.append(COMMA_DELIMITER);
@@ -58,7 +61,10 @@ public class CSV {
 		            } 
 		        }
 		    }
-		    
+
+			  /**
+			   * permet d'ecrire le csv de methode 
+			   * @return un fichier csv creer remplis d'informations sur les methodes*/ 
 		    public void ecrireMethod(){
 
 				String fileName = "methodes.csv";
@@ -75,7 +81,7 @@ public class CSV {
 		             
 		            //Write a new student object list to the CSV file
 		            for (Methode methode : ListeMethode.values()) {
-		                fileWriter.append(String.valueOf(methode)); // class Path (SIGNATURE?)
+		                fileWriter.append(String.valueOf(methode.getFile())); // class Path (SIGNATURE?)
 		                fileWriter.append(COMMA_DELIMITER);
 		                fileWriter.append(String.valueOf(methode)); // class name
 		                fileWriter.append(COMMA_DELIMITER);

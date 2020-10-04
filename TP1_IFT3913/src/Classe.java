@@ -15,6 +15,7 @@ public class Classe {
 	private List<String>  fileContent;
 	private List<Methode>  methods;
 	
+//CONSTRUCTEUR
 	public Classe(File file) {
 		this.fullFile = file;
 		this.fileContent = readFileInList(fullFile.getAbsolutePath());
@@ -35,6 +36,9 @@ public class Classe {
 		return methods;
 	}
 
+	/**
+	 * @param le nom du fichier que l'on veut evaluer
+	 * @return retourne une liste de string qui contiennent du text*/
 	public List<String> readFileInList(String fileName) 
 	  { 
 	    List<String> lines = Collections.emptyList(); 
@@ -49,7 +53,8 @@ public class Classe {
 	    } 
 	    return lines; 
 	  } 
-	
+	/**
+	 * Permet de trouver les methodes d'une classe specifique sur laquelle la fonction est appeler*/
 	public void findMethods() {
 		String regex = ".*(public|protected|private|static|\\s) +[\\w\\<\\>\\[\\],\\s]+\\s+(\\w+) *\\([^\\)]*\\) *(\\{?|[^;])";
 		
@@ -63,7 +68,8 @@ public class Classe {
         }		
 	}
 	
-	
+	/**
+	 * @return le nombre de ligne de code compter dans la classe*/
 	public int classe_LOC() {
 		
 		System.out.println(fileContent.size());
@@ -76,7 +82,8 @@ public class Classe {
 
 		return fileContent.size();
 	}
-	
+	/**
+	 * @return le nombre de ligne de commentaire compter dans la classe*/
 	public int classe_CLOC() 
 	{
 		int count = 0;

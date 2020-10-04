@@ -8,7 +8,7 @@ public class Methode {
 		private List<String>  file;
 		private List<String> contentMethod;
 		private List<String> commentsBeforeMethod;
-		
+		//CONSTRUCTEUR
 		public Methode(String name, String line, List<String> fileContent)
 		{
 			this.signature = name;
@@ -20,6 +20,8 @@ public class Methode {
 			findCommentsBefore();
 		}
 		
+		/**
+		 * Trouve le contenu dune methode en comptant les { }*/
 		public void findMethodContent()
 		{
 			int countAcco = 0;
@@ -58,12 +60,14 @@ public class Methode {
 				}
 			}
 		}
-		
+		/**
+		 * @return le nombre de ligne de code de la methode selectionner*/
 		public int methode_LOC()
 		{
 			return contentMethod.size();
 		}
-		
+		/**
+		 * @return le nombre de ligne de commentaire dans la methode selectionnee  y compris les commentaire avant la declaration de la methode*/
 		public int methode_CLOC()
 		{
 			int count = 0;
@@ -102,7 +106,8 @@ public class Methode {
 			return count + commentsBeforeMethod.size();
 		}
 		
-		
+		/**
+		 * Trouve les commentaires qui se trouvent avant le debut d'une methode*/
 		public void findCommentsBefore()
 		{
 			boolean inComment = false;
@@ -176,7 +181,9 @@ public class Methode {
 			}
 		}
 
-		
+		/**
+		 * @return le compte de*/
+		//TODO: completer javadocs
 		public int CC()
 		{
 			String regex = "(if|else|else if|do-while|while)\\s*\\(((?:[^\\(\\)]|\\(\\))*)\\)\\s*";

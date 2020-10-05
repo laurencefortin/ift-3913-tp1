@@ -13,13 +13,13 @@ import org.apache.commons.lang3.StringUtils;
 public class Classe {
 	private File fullFile;
 	private List<String>  fileContent;
-	private List<Methode>  methods;
+	public List<Methode>  methodes;
 	
 //CONSTRUCTEUR
 	public Classe(File file) {
 		this.fullFile = file;
 		this.fileContent = readFileInList(fullFile.getAbsolutePath());
-		this.methods = new ArrayList<Methode>();
+		this.methodes = new ArrayList<Methode>();
 		findMethods();
 		
 	}
@@ -33,7 +33,7 @@ public class Classe {
 	}
 
 	public List<Methode> getMethods() {
-		return methods;
+		return methodes;
 	}
 
 	/**
@@ -63,7 +63,7 @@ public class Classe {
 			if(temp.matches(regex)) 
 			{
 				String methodSplit[] = StringUtils.substringBetween(temp, "", "(").split(" ");
-				methods.add(new Methode(methodSplit[methodSplit.length - 1], temp, fileContent));
+				methodes.add(new Methode(methodSplit[methodSplit.length - 1], temp, fileContent));
 			}
         }		
 	}
@@ -135,7 +135,7 @@ public class Classe {
 	public int WMC()
 	{
 		int count = 0;
-		for(Methode methode : methods)
+		for(Methode methode : methodes)
 		{
 			count = count + methode.CC();
 		}

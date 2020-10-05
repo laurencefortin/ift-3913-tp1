@@ -108,12 +108,12 @@ public class Methode {
 		
 		
 		/**
-		 * @return la densitï¿½ de commentaires pour une mï¿½thode*/
+		 * @return la densité de commentaires pour une méthode*/
 		public int methode_DC() {
 			return methode_CLOC() / methode_LOC();
 		}
 		/**
-		 * @return le degrï¿½ selon lequel une mï¿½thode est bien commentï¿½e */
+		 * @return le degré selon lequel une méthode est bien commentée */
 		public int methode_BC() {
 			return methode_DC() / CC();
 		}
@@ -193,8 +193,7 @@ public class Methode {
 		}
 
 		/**
-		 * @return le compte de*/
-		//TODO: completer javadocs
+		 * @return la complexité cyclomatique de McCabe  d'une methode*/
 		public int CC()
 		{
 			String regex = "(if|else|else if|do-while|while)\\s*\\(((?:[^\\(\\)]|\\(\\))*)\\)\\s*";

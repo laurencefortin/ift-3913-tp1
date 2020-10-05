@@ -121,15 +121,17 @@ public class Classe {
 		return count;
 	}
 	/**
-	 * @return la densitï¿½ de commentaires pour une classe*/
+	 * @return la densité de commentaires pour une classe*/
 	public int classe_DC() {
 		return classe_CLOC() / classe_LOC();
 	}
 	/**
-	 * @return le degrï¿½ selon lequel une classe est bien commentï¿½e */
+	 * @return le degré selon lequel une classe est bien commentée */
 	public int classe_BC() {
 		return classe_DC() / WMC();
 	}
+	/**
+	 * @return la somme pondérée des complexités des méthodes d'une classe */
 	public int WMC()
 	{
 		int count = 0;

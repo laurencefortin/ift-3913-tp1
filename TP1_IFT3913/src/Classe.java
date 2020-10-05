@@ -120,4 +120,23 @@ public class Classe {
         }
 		return count;
 	}
+	/**
+	 * @return la densit� de commentaires pour une classe*/
+	public int classe_DC() {
+		return classe_CLOC() / classe_LOC();
+	}
+	/**
+	 * @return le degr� selon lequel une classe est bien comment�e */
+	public int classe_BC() {
+		return classe_DC() / WMC();
+	}
+	public int WMC()
+	{
+		int count = 0;
+		for(Methode methode : methods)
+		{
+			count = count + methode.CC();
+		}
+		return count;
+	}
 }

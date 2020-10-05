@@ -106,6 +106,17 @@ public class Methode {
 			return count + commentsBeforeMethod.size();
 		}
 		
+		
+		/**
+		 * @return la densit� de commentaires pour une m�thode*/
+		public int methode_DC() {
+			return methode_CLOC() / methode_LOC();
+		}
+		/**
+		 * @return le degr� selon lequel une m�thode est bien comment�e */
+		public int methode_BC() {
+			return methode_DC() / CC();
+		}
 		/**
 		 * Trouve les commentaires qui se trouvent avant le debut d'une methode*/
 		public void findCommentsBefore()

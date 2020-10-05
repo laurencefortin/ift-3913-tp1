@@ -97,11 +97,11 @@ public class CSV {
 		                fileWriter.append(COMMA_DELIMITER);
 		                fileWriter.append(String.valueOf(methode.methode_BC())); 
 		                fileWriter.append(COMMA_DELIMITER);
-		                fileWriter.append(String.valueOf(methode.getFile())); // class Path (SIGNATURE?)
+		                fileWriter.append(String.valueOf(classe.getFullFile().getAbsoluteFile())); // class Path (SIGNATURE?)
 		                fileWriter.append(COMMA_DELIMITER);
-		                fileWriter.append(String.valueOf(methode)); // class name
+		                fileWriter.append(String.valueOf(classe.getFullFile().getName())); // class name
 		                fileWriter.append(COMMA_DELIMITER);
-		                fileWriter.append(String.valueOf(methode.getClass()));//method's class
+		                fileWriter.append(String.valueOf(methode.getSignature()));//method's class
 		                fileWriter.append(COMMA_DELIMITER);
 		                fileWriter.append(String.valueOf(methode.methode_LOC()));
 		                fileWriter.append(COMMA_DELIMITER);

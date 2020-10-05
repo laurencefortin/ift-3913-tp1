@@ -44,7 +44,7 @@ public class Classe {
 	    List<String> lines = Collections.emptyList(); 
 	    try
 	    { 
-	      lines = Files.readAllLines(Paths.get(fileName), StandardCharsets.UTF_8); 
+	      lines = Files.readAllLines(Paths.get(fileName), StandardCharsets.ISO_8859_1); 
 	    } 
 	    catch (IOException e) 
 	    { 
@@ -122,13 +122,13 @@ public class Classe {
 	}
 	/**
 	 * @return la densité de commentaires pour une classe*/
-	public int classe_DC() {
-		return classe_CLOC() / classe_LOC();
+	public float classe_DC() {
+		return (float)classe_CLOC() / (float)classe_LOC();
 	}
 	/**
 	 * @return le degré selon lequel une classe est bien commentée */
-	public int classe_BC() {
-		return classe_DC() / WMC();
+	public float classe_BC() {
+		return (float)classe_DC() / (float)WMC();
 	}
 	/**
 	 * @return la somme pondérée des complexités des méthodes d'une classe */

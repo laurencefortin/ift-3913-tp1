@@ -109,13 +109,13 @@ public class Methode {
 		
 		/**
 		 * @return la densité de commentaires pour une méthode*/
-		public int methode_DC() {
-			return methode_CLOC() / methode_LOC();
+		public float methode_DC() {
+				return ((float)methode_CLOC() / (float)methode_LOC());
 		}
 		/**
 		 * @return le degré selon lequel une méthode est bien commentée */
-		public int methode_BC() {
-			return methode_DC() / CC();
+		public float methode_BC() {
+			return ((float)methode_DC() / (float)CC());
 		}
 		/**
 		 * Trouve les commentaires qui se trouvent avant le debut d'une methode*/
@@ -196,15 +196,11 @@ public class Methode {
 		 * @return la complexité cyclomatique de McCabe  d'une methode*/
 		public int CC()
 		{
-			String regex = "(if|else|else if|do-while|while)\\s*\\(((?:[^\\(\\)]|\\(\\))*)\\)\\s*";
+			String regex = ".*(if|else|else if|do-while|while|switch)\\s*\\(((?:[^\\(\\)]|\\(\\))*)\\)\\s*.*";
 			int count = 1;
-			int returnBeforeEnd = 0;//variable sert a quoi??
 			for (String temp : contentMethod) 
 			{
-				if(temp.contains("return"))
-				{
-					returnBeforeEnd++;
-				}
+			
 				if(temp.matches(regex))
 				{
 					count++;
@@ -217,6 +213,7 @@ public class Methode {
 						count++;
 					}
 				}
+
 			}
 			return count;
 		}

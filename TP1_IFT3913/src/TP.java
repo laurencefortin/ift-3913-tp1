@@ -6,12 +6,12 @@ import javax.swing.JFileChooser;
 
 public class TP {
 	
-	private List<Classe> classes = new ArrayList<Classe>();
+	private static List<Classe> classes = new ArrayList<Classe>();
 	/**
 	 * @param liste d'arguments
 	 * 
 	 * */
-	public void main(String[] args) throws IOException 
+	public static void main(String[] args) throws IOException 
 	{		
 		//On demande au user de choisir un path
 		JFileChooser fc = new JFileChooser();
@@ -30,7 +30,7 @@ public class TP {
  * @param directory Listing qui donne la liste des file a iterer
  * 
  * */
-	public void iterateOnFiles(File[] directoryListing) {
+	public static void iterateOnFiles(File[] directoryListing) {
 		if (directoryListing != null) {
 		      for (File child : directoryListing) 
 		      {

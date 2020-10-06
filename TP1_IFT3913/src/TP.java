@@ -38,32 +38,16 @@ public class TP {
 		    	  {
 		    		  
 			    	  Classe temp = new Classe(child);
-			    	  
-			    	  System.out.println("Nombre de lignes de commentaires du fichier : " + temp.classe_CLOC());
-			    	  System.out.println("Nombre de lignes de codes du fichier : " + temp.classe_LOC());
-			    	  if(temp.getMethods().size() > 0)
-			    	  {
-								
-			    	  }
-				    	  for(Methode methode : temp.getMethods())
-				    	  {
-				    		System.out.println(methode.getSignature());
-				    		System.out.println(methode.getLine());
-				    	    methode.findMethodContent();
-				    	    methode.findCommentsBefore();
-				    	    System.out.println("Nombre de lignes de commentaires de la methode : " + methode.methode_CLOC());
-				    	    System.out.println("Nombre de lignes de code de la methode : " + methode.methode_LOC());
-				    	    System.out.println("testcc : " + methode.CC());
-				   
-				    	  }
 				     classes.add(temp);
-			    }
+		    	  }
 		    	  else
 		    	  {
 		  		    iterateOnFiles(child.listFiles());
 		    	  }
+		    	  CSV csv = new CSV(classes);
+		    	  
 		      }
-		      }
+		   }
 	}
 	
 

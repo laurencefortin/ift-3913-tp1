@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
+
 public class Classe {
 	private File fullFile;
 	private List<String>  fileContent;
@@ -56,12 +57,13 @@ public class Classe {
 	/**
 	 * Permet de trouver les methodes d'une classe specifique sur laquelle la fonction est appeler*/
 	public void findMethods() {
-		String regex = ".*(public|protected|private|static|\\s) +[\\w\\<\\>\\[\\],\\s]+\\s+(\\w+) *\\([^\\)]*\\) *(\\{?|[^;])";
+		String regex = ".*(public|protected|private|static) +[\\w\\<\\>\\[\\],\\s]+\\s+(\\w+) *\\([^\\)]*\\) *(\\{?|[^;])";
 		
 		for (String temp : fileContent) 
 		{
 			if(temp.matches(regex)) 
 			{
+				System.out.println(temp);
 				String methodSplit[] = StringUtils.substringBetween(temp, "", "(").split(" ");
 				methodes.add(new Methode(methodSplit[methodSplit.length - 1], temp, fileContent));
 			}
@@ -72,7 +74,6 @@ public class Classe {
 	 * @return le nombre de ligne de code compter dans la classe*/
 	public int classe_LOC() {
 		
-		System.out.println(fileContent.size());
 		Iterator<String> iter = fileContent.iterator();
 		while (iter.hasNext()) {
 		    String str = iter.next();

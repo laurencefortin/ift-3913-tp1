@@ -65,7 +65,10 @@ public class Classe {
 			{
 				System.out.println(temp);
 				String methodSplit[] = StringUtils.substringBetween(temp, "", "(").split(" ");
-				methodes.add(new Methode(methodSplit[methodSplit.length - 1], temp, fileContent));
+				String methodSplit2 = StringUtils.substringBetween(temp, methodSplit[methodSplit.length - 1], ")");
+				String signature = methodSplit[methodSplit.length - 1] + methodSplit2 + ")";
+				System.out.println(signature);
+				methodes.add(new Methode(signature, temp, fileContent));
 			}
         }		
 	}
@@ -122,17 +125,17 @@ public class Classe {
 		return count;
 	}
 	/**
-	 * @return la densité de commentaires pour une classe*/
+	 * @return la densitï¿½ de commentaires pour une classe*/
 	public float classe_DC() {
 		return (float)classe_CLOC() / (float)classe_LOC();
 	}
 	/**
-	 * @return le degré selon lequel une classe est bien commentée */
+	 * @return le degrï¿½ selon lequel une classe est bien commentï¿½e */
 	public float classe_BC() {
 		return (float)classe_DC() / (float)WMC();
 	}
 	/**
-	 * @return la somme pondérée des complexités des méthodes d'une classe */
+	 * @return la somme pondï¿½rï¿½e des complexitï¿½s des mï¿½thodes d'une classe */
 	public int WMC()
 	{
 		int count = 0;

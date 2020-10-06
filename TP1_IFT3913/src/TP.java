@@ -34,13 +34,19 @@ public class TP {
 		if (directoryListing != null) {
 		      for (File child : directoryListing) 
 		      {
-		    	  if(!child.isDirectory())
+		    	  String extension = "";
+		    	  int i = child.getName().lastIndexOf('.');
+		    	  if (i > 0) {
+		    	      extension = child.getName().substring(i+1);
+		    	  }
+
+		    	  if(!child.isDirectory() && extension.equals("java"))
 		    	  {
 		    		  
 			    	  Classe temp = new Classe(child);
-				     classes.add(temp);
+			    	  classes.add(temp);
 		    	  }
-		    	  else
+		    	  else if (child.isDirectory())
 		    	  {
 		  		    iterateOnFiles(child.listFiles());
 		    	  }

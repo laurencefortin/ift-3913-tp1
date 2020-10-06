@@ -108,12 +108,12 @@ public class Methode {
 		
 		
 		/**
-		 * @return la densité de commentaires pour une méthode*/
+		 * @return la densitï¿½ de commentaires pour une mï¿½thode*/
 		public float methode_DC() {
 				return ((float)methode_CLOC() / (float)methode_LOC());
 		}
 		/**
-		 * @return le degré selon lequel une méthode est bien commentée */
+		 * @return le degrï¿½ selon lequel une mï¿½thode est bien commentï¿½e */
 		public float methode_BC() {
 			return ((float)methode_DC() / (float)CC());
 		}
@@ -193,15 +193,16 @@ public class Methode {
 		}
 
 		/**
-		 * @return la complexité cyclomatique de McCabe  d'une methode*/
+		 * @return la complexitï¿½ cyclomatique de McCabe  d'une methode*/
 		public int CC()
 		{
 			String regex = ".*(if|else|else if|do-while|while|switch)\\s*\\(((?:[^\\(\\)]|\\(\\))*)\\)\\s*.*";
+			String regexCase = "\s*case .*:";
 			int count = 1;
 			for (String temp : contentMethod) 
 			{
 			
-				if(temp.matches(regex))
+				if(temp.matches(regex) || temp.matches(regexCase))
 				{
 					count++;
 					if(temp.contains("&&"))

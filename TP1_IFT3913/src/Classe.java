@@ -10,27 +10,25 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-
 public class Classe {
-	private File fullFile;
-	private List<String>  fileContent;
+	private File fichierComplet;
+	private List<String>  contenueFichier;
 	public List<Methode>  methodes;
 	
 //CONSTRUCTEUR
 	public Classe(File file) {
-		this.fullFile = file;
-		this.fileContent = readFileInList(fullFile.getAbsolutePath());
+		this.fichierComplet = file;
+		this.contenueFichier = lireFicherEnOrdre(fichierComplet.getAbsolutePath());
 		this.methodes = new ArrayList<Methode>();
-		findMethods();
-		
+		trouverMethodes();
 	}
 	
 	public File getFullFile() {
-		return fullFile;
+		return fichierComplet;
 	}
 
 	public List<String> getFileContent() {
-		return fileContent;
+		return contenueFichier;
 	}
 
 	public List<Methode> getMethods() {
@@ -40,12 +38,12 @@ public class Classe {
 	/**
 	 * @param le nom du fichier que l'on veut evaluer
 	 * @return retourne une liste de string qui contiennent du text*/
-	public List<String> readFileInList(String fileName) 
+	public List<String> lireFicherEnOrdre(String nomFichier) 
 	  { 
 	    List<String> lines = Collections.emptyList(); 
 	    try
 	    { 
-	      lines = Files.readAllLines(Paths.get(fileName), StandardCharsets.ISO_8859_1); 
+	      lines = Files.readAllLines(Paths.get(nomFichier), StandardCharsets.ISO_8859_1); 
 	    } 
 	    catch (IOException e) 
 	    { 
@@ -56,19 +54,18 @@ public class Classe {
 	  } 
 	/**
 	 * Permet de trouver les methodes d'une classe specifique sur laquelle la fonction est appeler*/
-	public void findMethods() {
+	public void trouverMethodes() {
 		String regex = ".*(public|protected|private|static) +[\\w\\<\\>\\[\\],\\s]+\\s+(\\w+) *\\([^\\)]*\\) *(\\{?|[^;])";
 		
-		for (String temp : fileContent) 
+		for (String temp : contenueFichier) 
 		{
 			if(temp.matches(regex)) 
 			{
-				System.out.println(temp);
-				String methodSplit[] = StringUtils.substringBetween(temp, "", "(").split(" ");
-				String methodSplit2 = StringUtils.substringBetween(temp, methodSplit[methodSplit.length - 1], ")");
-				String signature = methodSplit[methodSplit.length - 1] + methodSplit2 + ")";
+				String separationMethode1[] = StringUtils.substringBetween(temp, "", "(").split(" ");
+				String separationMethode2 = StringUtils.substringBetween(temp, separationMethode1[separationMethode1.length - 1], ")");
+				String signature = separationMethode1[separationMethode1.length - 1] + separationMethode2 + ")";
 				System.out.println(signature);
-				methodes.add(new Methode(signature, temp, fileContent));
+				methodes.add(new Methode(signature, temp, contenueFichier));
 			}
         }		
 	}
@@ -77,52 +74,52 @@ public class Classe {
 	 * @return le nombre de ligne de code compter dans la classe*/
 	public int classe_LOC() {
 		
-		Iterator<String> iter = fileContent.iterator();
-		while (iter.hasNext()) {
-		    String str = iter.next();
+		Iterator<String> iterateur = contenueFichier.iterator();
+		while (iterateur.hasNext()) {
+		    String str = iterateur.next();
 		    if (str == null || str.trim().isEmpty())
-		        iter.remove();
+		        iterateur.remove();
 		}
 
-		return fileContent.size();
+		return contenueFichier.size();
 	}
 	/**
 	 * @return le nombre de ligne de commentaire compter dans la classe*/
 	public int classe_CLOC() 
 	{
-		int count = 0;
-		boolean inComment = false;
-		for (String temp : fileContent) 
+		int compteur = 0;
+		boolean enCommentaire = false;
+		for (String temp : contenueFichier) 
 		{
-			if(!inComment)
+			if(!enCommentaire)
 			{
 				if(temp.contains("//")) 
 				{
-					count++;
+					compteur++;
 				}	
 				if(temp.contains("/*") || temp.contains("/**"))
 				{
-					count++;
-					inComment = true;
+					compteur++;
+					enCommentaire = true;
 				}
 				if(temp.contains("*/"))
 				{
-					inComment = false;
+					enCommentaire = false;
 				}
 			}
 			else
 			{
 				if(temp != null && !temp.trim().isEmpty())
 				{
-					count++;
+					compteur++;
 				}
 				if(temp.contains("*/"))
 				{
-					inComment = false;
+					enCommentaire = false;
 				}
 			}
         }
-		return count;
+		return compteur;
 	}
 	/**
 	 * @return la densit� de commentaires pour une classe*/
@@ -138,11 +135,11 @@ public class Classe {
 	 * @return la somme pond�r�e des complexit�s des m�thodes d'une classe */
 	public int WMC()
 	{
-		int count = 0;
+		int compteur = 0;
 		for(Methode methode : methodes)
 		{
-			count = count + methode.CC();
+			compteur = compteur + methode.CC();
 		}
-		return count;
+		return compteur;
 	}
 }

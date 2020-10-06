@@ -78,8 +78,7 @@ public class CSV {
 
 				String fileName = "methodes.csv";
 		        FileWriter fileWriter = null;
-		        
-		                 
+		               
 		        try {
 		        	
 		            fileWriter = new FileWriter(fileName);

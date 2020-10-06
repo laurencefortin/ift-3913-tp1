@@ -4,56 +4,56 @@ import java.util.ListIterator;
 
 public class Methode {
 		private String signature;
-		private String line;
-		private List<String>  file;
-		private List<String> contentMethod;
-		private List<String> commentsBeforeMethod;
+		private String ligne;
+		private List<String>  fichier;
+		private List<String> contenuMethode;
+		private List<String> commentaireAvantMethode;
 		//CONSTRUCTEUR
-		public Methode(String name, String line, List<String> fileContent)
+		public Methode(String nom, String ligne, List<String> contenuFichier)
 		{
-			this.signature = name;
-			this.line = line;
-			this.file = fileContent;
-			this.contentMethod = new ArrayList<String>();
-			findMethodContent();
-			this.commentsBeforeMethod = new ArrayList<String>();
-			findCommentsBefore();
+			this.signature = nom;
+			this.ligne = ligne;
+			this.fichier = contenuFichier;
+			this.contenuMethode = new ArrayList<String>();
+			trouverContenuMethode();
+			this.commentaireAvantMethode = new ArrayList<String>();
+			trouverCommentaireAvantMethode();
 		}
 		
 		/**
 		 * Trouve le contenu dune methode en comptant les { }*/
-		public void findMethodContent()
+		public void trouverContenuMethode()
 		{
-			int countAcco = 0;
-			boolean inMethod = false;
-			for (String temp : this.file)
+			int compteurAccolade = 0;
+			boolean dansMethode = false;
+			for (String temp : this.fichier)
 			{
-				if(temp.equals(line))
+				if(temp.equals(ligne))
 				{
-					this.contentMethod.add(temp);
-					inMethod = true;
+					this.contenuMethode.add(temp);
+					dansMethode = true;
 					if(temp.contains("{"))
 					{
-						countAcco++;
+						compteurAccolade++;
 					}
 				}
 				
-				else if (inMethod == true)
+				else if (dansMethode == true)
 				{
 					if(temp != null && !temp.trim().isEmpty())
 					{		
-						this.contentMethod.add(temp);
+						this.contenuMethode.add(temp);
 						if(!temp.contains("}") && temp.contains("{"))
 						{
-							countAcco++;
+							compteurAccolade++;
 						}
 						if(temp.contains("}") && !temp.contains("{"))
 						{
-							countAcco--;
+							compteurAccolade--;
 						}
-						if(countAcco == 0)
+						if(compteurAccolade == 0)
 						{
-							inMethod = false;
+							dansMethode = false;
 							return;
 						}
 					}
@@ -64,179 +64,176 @@ public class Methode {
 		 * @return le nombre de ligne de code de la methode selectionner*/
 		public int methode_LOC()
 		{
-			return contentMethod.size();
+			return contenuMethode.size();
 		}
 		/**
 		 * @return le nombre de ligne de commentaire dans la methode selectionnee  y compris les commentaire avant la declaration de la methode*/
 		public int methode_CLOC()
 		{
-			int count = 0;
-			boolean inComment = false;
-			for (String temp : contentMethod) 
+			int compteur = 0;
+			boolean dansCommentaire = false;
+			for (String temp : contenuMethode) 
 			{
-				if(!inComment)
+				if(!dansCommentaire)
 				{
-						
 					if(temp.contains("//")) 
 					{
-						count++;
+						compteur++;
 					}	
 					if(temp.contains("/*") || temp.contains("/**"))
 					{
-						count++;
-						inComment = true;
+						compteur++;
+						dansCommentaire = true;
 					}
 					if(temp.contains("*/"))
 					{
-						inComment = false;
+						dansCommentaire = false;
 					}
 				}
 				else
 				{
 					if(temp != null && !temp.trim().isEmpty())
 					{
-						count++;
+						compteur++;
 					}
 					if(temp.contains("*/"))
 					{
-						inComment = false;
+						dansCommentaire = false;
 					}
 				}
 	        }
-			return count + commentsBeforeMethod.size();
+			return compteur + commentaireAvantMethode.size();
 		}
 		
 		
 		/**
-		 * @return la densitï¿½ de commentaires pour une mï¿½thode*/
+		 * @return la densité de commentaires pour une méthode*/
 		public float methode_DC() {
 				return ((float)methode_CLOC() / (float)methode_LOC());
 		}
 		/**
-		 * @return le degrï¿½ selon lequel une mï¿½thode est bien commentï¿½e */
+		 * @return le degré selon lequel une méthode est bien commentée */
 		public float methode_BC() {
 			return ((float)methode_DC() / (float)CC());
 		}
 		/**
 		 * Trouve les commentaires qui se trouvent avant le debut d'une methode*/
-		public void findCommentsBefore()
+		public void trouverCommentaireAvantMethode()
 		{
-			boolean inComment = false;
-			boolean beforeMethod = false;
-			boolean onlyEmpty = true;
-			ListIterator<String> listIterator = file.listIterator(file.size());
-			String current = listIterator.previous();
-			while (listIterator.hasPrevious()) 
+			boolean enCommentaite = false;
+			boolean avantMethode = false;
+			boolean videSeulement = true;
+			ListIterator<String> iterateurList = fichier.listIterator(fichier.size());
+			String courant = iterateurList.previous();
+			while (iterateurList.hasPrevious()) 
 			{
-				if(current.equals(line))
+				if(courant.equals(ligne))
 				{
-					current = listIterator.previous();
-					beforeMethod = true;
+					courant = iterateurList.previous();
+					avantMethode = true;
 				}
-				
 
-				if(beforeMethod)
+				if(avantMethode)
 				{
-					if(!inComment)
+					if(!enCommentaite)
 					{
-						if(current == null || current.trim().isEmpty())
+						if(courant == null || courant.trim().isEmpty())
 						{
-							current = listIterator.previous();
+							courant = iterateurList.previous();
 						}
 						
-						else if(current.contains("//"))
+						else if(courant.contains("//"))
 						{
-							if(onlyEmpty = true)
+							if(videSeulement = true)
 							{
-								onlyEmpty = false;
+								videSeulement = false;
 							}
-							commentsBeforeMethod.add(current);
-							current = listIterator.previous();
+							commentaireAvantMethode.add(courant);
+							courant = iterateurList.previous();
 						}
 						
-						else if(current.contains("*/"))
+						else if(courant.contains("*/"))
 						{
-							if(onlyEmpty = true)
+							if(videSeulement = true)
 							{
-								onlyEmpty = false;
+								videSeulement = false;
 							}
-							inComment = true;
-							commentsBeforeMethod.add(current);
-							current = listIterator.previous();
+							enCommentaite = true;
+							commentaireAvantMethode.add(courant);
+							courant = iterateurList.previous();
 						}
 						else
 						{
-							if(onlyEmpty)
+							if(videSeulement)
 							{
-								commentsBeforeMethod.clear();
+								commentaireAvantMethode.clear();
 							}
 							return;
 						}
 					}
 					else
 					{
-						if(current.contains("/**") || current.contains("/*"))
+						if(courant.contains("/**") || courant.contains("/*"))
 						{
-							commentsBeforeMethod.add(current);
+							commentaireAvantMethode.add(courant);
 							return;
 						}
-						commentsBeforeMethod.add(current);
-						current = listIterator.previous();
+						commentaireAvantMethode.add(courant);
+						courant = iterateurList.previous();
 					}
 		
 				}
 				else {
-					current = listIterator.previous();
+					courant = iterateurList.previous();
 				}
 				
 			}
 		}
 
 		/**
-		 * @return la complexitï¿½ cyclomatique de McCabe  d'une methode*/
+		 * @return la complexité cyclomatique de McCabe d'une methode*/
 		public int CC()
 		{
 			String regex = ".*(if|else|else if|do-while|while|switch)\\s*\\(((?:[^\\(\\)]|\\(\\))*)\\)\\s*.*";
-			String regexCase = "\s*case .*:";
-			int count = 1;
-			for (String temp : contentMethod) 
+			int compteur = 1;
+			for (String temp : contenuMethode) 
 			{
 			
-				if(temp.matches(regex) || temp.matches(regexCase))
+				if(temp.matches(regex))
 				{
-					count++;
+					compteur++;
 					if(temp.contains("&&"))
 					{
-						count++;
+						compteur++;
 					}
 					if(temp.contains("||"))
 					{
-						count++;
+						compteur++;
 					}
 				}
 
 			}
-			return count;
+			return compteur;
 		}
-		
+		//GETTER
 		public String getSignature() {
 			return signature;
 		}
 
 		public String getLine() {
-			return line;
+			return ligne;
 		}
 
 		public List<String> getFile() {
-			return file;
+			return fichier;
 		}
 
 		public List<String> getContentMethod() {
-			return contentMethod;
+			return contenuMethode;
 		}
 
 		public List<String> getCommentsBeforeMethod() {
-			return commentsBeforeMethod;
+			return commentaireAvantMethode;
 		}
 
 		

@@ -21,18 +21,18 @@ public class TP {
 		//Si le path est bon, on trouve toute les classes
 		if(returnVal == JFileChooser.APPROVE_OPTION) 
 		{
-		    File yourFolder = fc.getSelectedFile();
-		    File[] directoryListing = yourFolder.listFiles();
-		    iterateOnFiles(directoryListing);
+		    File fichierChoisi = fc.getSelectedFile();
+		    File[] listeDossier = fichierChoisi.listFiles();
+		    iterateOnFiles(listeDossier);
 		    } 
 		}
 /**
  * @param directory Listing qui donne la liste des file a iterer
  * 
  * */
-	public static void iterateOnFiles(File[] directoryListing) {
-		if (directoryListing != null) {
-		      for (File child : directoryListing) 
+	public static void iterateOnFiles(File[] listeDossier) {
+		if (listeDossier != null) {
+		      for (File child : listeDossier) 
 		      {
 		    	  String extension = "";
 		    	  int i = child.getName().lastIndexOf('.');
@@ -55,6 +55,4 @@ public class TP {
 		      }
 		   }
 	}
-	
-
 }

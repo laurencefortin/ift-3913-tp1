@@ -64,7 +64,6 @@ public class Classe {
 				String separationMethode1[] = StringUtils.substringBetween(temp, "", "(").split(" ");
 				String separationMethode2 = StringUtils.substringBetween(temp, separationMethode1[separationMethode1.length - 1], ")");
 				String signature = separationMethode1[separationMethode1.length - 1] + separationMethode2 + ")";
-				System.out.println(signature);
 				methodes.add(new Methode(signature, temp, contenueFichier));
 			}
         }		

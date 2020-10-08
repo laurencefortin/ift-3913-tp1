@@ -15,7 +15,9 @@ public class TP {
 	 * */
 	public static void main(String[] args) throws IOException 
 	{		
-			Scanner scanner = new Scanner(System.in);  
+			System.out.println("Veuillez entrer le chemin du dossier choisi");
+			Scanner scanner = new Scanner(System.in); 
+			
 			/*if(true)
 			{
 				//On demande au user de choisir un path
@@ -23,7 +25,7 @@ public class TP {
 				fc.setCurrentDirectory(new java.io.File(".")); // start at application current directory
 				fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 				int returnVal = fc.showDialog(null, "Choisir un dossier");
-				//Si le path est bon, on trouve toute les classes
+				//Si lde path est bon, on trouve toute les classes
 				if(returnVal == JFileChooser.APPROVE_OPTION) 
 				{
 				    File yourFolder = fc.getSelectedFile();
@@ -78,6 +80,4 @@ public class TP {
 			    }
 			    return true;
 			}
-
 	}
-

@@ -1,0 +1,25 @@
+TP1 - IFT3913
+Laurence Fortin 
+Julien Lanctôt 
+---------------------------------------------------------------------------
+| Liens du répertoire : https://github.com/laurencefortin/ift-3913-tp1.git |
+---------------------------------------------------------------------------
+Partie 4 : jfreechart-master
+
+Les 3 classes les moins bien commentées sont: 	
+ - XYPlot.java avec un classe_bc de 0.001349044
+ - CategoryPlot.java avec un classe_bc de 0.0015374105
+ - ChartPanel.java avec un classe_bc de 0.001927055
+
+ 
+Les 3 méthodes les moins bien commentées sont: 
+(Nous avons choisi de ne pas prendre les méthodes non commentées du tout
+ afin de pendre des méthodes un peu plus complexe qui demande des commentaires)
+ -  equals(Object obj) dans la classe  PiePlot.java avec une méthodes_BC de 0.00048379292
+ -  equals(Object obj) dans la classe   ValueAxis.java avec une méthodes_BC de 0.0.001451379
+ -  arrange(Graphics2D g2, RectangleConstraint constraint) de la classe  PaintScaleLegend.java avec une méthodes_BC de 0.001451379
+
+
+Nos améliorations seraient 
+
+ de mieux commenter WTF cette question

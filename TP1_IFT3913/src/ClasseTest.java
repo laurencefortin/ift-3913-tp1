@@ -32,7 +32,7 @@ public class ClasseTest {
 			classeTest = new Classe(file);
 		}
 
-		
+	/*	
 		@Test
 		public void testClasse_CLOC_fonctionne() {
 			// Arrange.
@@ -41,17 +41,17 @@ public class ClasseTest {
 			
 			// Assert.
 			assertEquals(3, classeTest.classe_CLOC());
-		}
-		
+		*/
+	
 		@Test
-		public void testClasse_CLOC_mauvaisCompte()) {
+		public void testClasse_CLOC_mauvaisCompte() {
 			// Arrange.
 			String contenu = "public class Main {	\r\n"
 					+ "/* */ /*\r\n"
 					+ "aa\r\n"
 					+ "aaa\r\n"
 					+ "bbbb\r\n"
-					+ "*/\r\n"
+					+ "\r\n"
 					+ "	// Objets principaux du programme.\r\n"
 					+ "	public static void main(String[] args) {\r\n"
 					+ "		\r\n"
@@ -76,7 +76,7 @@ public class ClasseTest {
 			// Assert.
 			assertEquals(1, classeTest.classe_CLOC());
 		}
-
+*/
 		
 	
 

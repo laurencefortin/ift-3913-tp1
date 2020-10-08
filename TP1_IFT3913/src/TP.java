@@ -13,12 +13,13 @@ public class TP {
 	 * @param liste d'arguments
 	 * 
 	 * */
+	private static List<Classe> classes = new ArrayList<Classe>(); 
 	public static void main(String[] args) throws IOException 
 	{		
 			System.out.println("Veuillez entrer le chemin du dossier choisi");
 			Scanner scanner = new Scanner(System.in); 
 			
-			/*if(true)
+		/*	if(true)
 			{
 				//On demande au user de choisir un path
 				JFileChooser fc = new JFileChooser();
@@ -46,7 +47,7 @@ public class TP {
 		 * 
 		 * */
 			public static void iterateOnFiles(File[] directoryListing) {
-				List<Classe> classes = new ArrayList<Classe>();
+				
 				if (directoryListing != null) {
 				      for (File child : directoryListing) 
 				      {

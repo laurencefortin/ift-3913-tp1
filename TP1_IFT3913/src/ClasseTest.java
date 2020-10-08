@@ -10,7 +10,24 @@ public class ClasseTest {
 		private Classe classeTest;
 		@Before
 		public void setUp() {
-			String contenu = "";
+			String contenu = "public class Main {	\r\n"
+					+ "	\r\n"
+					+ "	// Objets principaux du programme.\r\n"
+					+ "	public static void main(String[] args) {\r\n"
+					+ "		\r\n"
+					+ "		menu = new Menu();\r\n"
+					+ "		procedure = new Procedure();\r\n"
+					+ "		\r\n"
+					+ "		repertoireMembres = new RepertoireMembres(CentreDonnee.lireMembres());\r\n"
+					+ "		repertoireServices = new RepertoireServices(CentreDonnee.lireServices());\r\n"
+					+ "		\r\n"
+					+ "		// Affichage du guide d'utilisation du programme.\r\n"
+					+ "		afficherGuide();\r\n"
+					+ "		\r\n"
+					+ "		// Gestion du menu Principal.\r\n"
+					+ "		menuPrincipal();\r\n"
+					+ "	}\r\n"
+					+ "}";
 			File file = new File(contenu);
 			classeTest = new Classe(file);
 		}
@@ -19,24 +36,45 @@ public class ClasseTest {
 		@Test
 		public void testClasse_CLOC_fonctionne() {
 			// Arrange.
-
+				
 			// Act.
-			repertoireMembre.ajouterMembre(membreTest);
 			
 			// Assert.
-			assertEquals(2, repertoireMembre.getListeMembre().size());
-			assertTrue(repertoireMembre.getListeMembre().containsKey(membreTest.getNumero()));
+			assertEquals(3, classeTest.classe_CLOC());
 		}
 		
-		@Test(expected = NullPointerException.class)
-		public void testAjouterMembre_lanceException_membreNull() {
+		@Test
+		public void testClasse_CLOC_mauvaisCompte()) {
 			// Arrange.
+			String contenu = "public class Main {	\r\n"
+					+ "/* */ /*\r\n"
+					+ "aa\r\n"
+					+ "aaa\r\n"
+					+ "bbbb\r\n"
+					+ "*/\r\n"
+					+ "	// Objets principaux du programme.\r\n"
+					+ "	public static void main(String[] args) {\r\n"
+					+ "		\r\n"
+					+ "		menu = new Menu();\r\n"
+					+ "		procedure = new Procedure();\r\n"
+					+ "		\r\n"
+					+ "		repertoireMembres = new RepertoireMembres(CentreDonnee.lireMembres());\r\n"
+					+ "		repertoireServices = new RepertoireServices(CentreDonnee.lireServices());\r\n"
+					+ "		\r\n"
+					+ "		// Affichage du guide d'utilisation du programme.\r\n"
+					+ "		afficherGuide();\r\n"
+					+ "		\r\n"
+					+ "		// Gestion du menu Principal.\r\n"
+					+ "		menuPrincipal();\r\n"
+					+ "	}\r\n"
+					+ "}";
+			File file = new File(contenu);
 
 			// Act.
-			repertoireMembre.ajouterMembre(null);
+			classeTest.setFichierComplet(file);
 
 			// Assert.
-			assertEquals(1, repertoireMembre.getListeMembre().size());
+			assertEquals(1, classeTest.classe_CLOC());
 		}
 
 		

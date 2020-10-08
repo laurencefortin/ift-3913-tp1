@@ -52,6 +52,10 @@ public class Classe {
 	    } 
 	    return lines; 
 	  } 
+	public void setFichierComplet(File fichierComplet) {
+		this.fichierComplet = fichierComplet;
+	}
+
 	/**
 	 * Permet de trouver les methodes d'une classe specifique sur laquelle la fonction est appeler*/
 	public void trouverMethodes() {
@@ -96,13 +100,18 @@ public class Classe {
 				{
 					compteur++;
 				}	
-				if(temp.contains("/*") || temp.contains("/**"))
+				else if(temp.contains("/*") || temp.contains("/**"))
 				{
 					compteur++;
 					enCommentaire = true;
+					if(temp.contains("*/"))
+					{
+						enCommentaire = false;
+					}
 				}
-				if(temp.contains("*/"))
+				else if(temp.contains("*/"))
 				{
+					compteur++;
 					enCommentaire = false;
 				}
 			}

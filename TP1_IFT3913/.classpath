@@ -11,10 +11,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Julien/Desktop/TP1_IFT3913/ift-3913-tp1/TP1_IFT3913/commons-lang3-3.11.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Laurence/Desktop/IFT-3913/ift-3913-tp1/TP1_IFT3913/commons-lang3-3.11.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

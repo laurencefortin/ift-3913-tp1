@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class Methode {
 		private String signature;
 		private String ligne;
@@ -9,9 +11,9 @@ public class Methode {
 		private List<String> contenuMethode;
 		private List<String> commentaireAvantMethode;
 		//CONSTRUCTEUR
-		public Methode(String nom, String ligne, List<String> contenuFichier)
+		public Methode(String ligne, List<String> contenuFichier)
 		{
-			this.signature = nom;
+			this.signature = trouverSignature(ligne);
 			this.ligne = ligne;
 			this.fichier = contenuFichier;
 			this.contenuMethode = new ArrayList<String>();
@@ -20,6 +22,15 @@ public class Methode {
 			trouverCommentaireAvantMethode();
 		}
 		
+		
+		public String trouverSignature(String ligne)
+		{
+			String separationMethode1[] = StringUtils.substringBetween(ligne, "", "(").split(" ");
+			String separationMethode2 = StringUtils.substringBetween(ligne, separationMethode1[separationMethode1.length - 1], ")");
+			String signature = separationMethode1[separationMethode1.length - 1] + separationMethode2 + ")";
+			
+			return signature;
+		}
 		/**
 		 * Trouve le contenu dune methode en comptant les { }*/
 		public void trouverContenuMethode()

@@ -18,8 +18,9 @@ public class Classe {
 //CONSTRUCTEUR
 	public Classe(File file) {
 		this.fichierComplet = file;
-		this.contenueFichier = lireFicherEnOrdre(fichierComplet.getAbsolutePath());
+		this.contenueFichier = new ArrayList<String>();
 		this.methodes = new ArrayList<Methode>();
+		lireFicherEnOrdre();
 		trouverMethodes();
 	}
 	
@@ -38,8 +39,9 @@ public class Classe {
 	/**
 	 * @param le nom du fichier que l'on veut evaluer
 	 * @return retourne une liste de string qui contiennent du text*/
-	public List<String> lireFicherEnOrdre(String nomFichier) 
+	public void lireFicherEnOrdre() 
 	  { 
+		String nomFichier = fichierComplet.getAbsolutePath();
 	    List<String> lines = Collections.emptyList(); 
 	    try
 	    { 
@@ -50,8 +52,9 @@ public class Classe {
 	    	 
 	      e.printStackTrace(); 
 	    } 
-	    return lines; 
+             this.contenueFichier = lines; 
 	  } 
+	
 	public void setFichierComplet(File fichierComplet) {
 		this.fichierComplet = fichierComplet;
 	}
@@ -65,10 +68,7 @@ public class Classe {
 		{
 			if(temp.matches(regex)) 
 			{
-				String separationMethode1[] = StringUtils.substringBetween(temp, "", "(").split(" ");
-				String separationMethode2 = StringUtils.substringBetween(temp, separationMethode1[separationMethode1.length - 1], ")");
-				String signature = separationMethode1[separationMethode1.length - 1] + separationMethode2 + ")";
-				methodes.add(new Methode(signature, temp, contenueFichier));
+				methodes.add(new Methode(temp, contenueFichier));
 			}
         }		
 	}
@@ -109,11 +109,6 @@ public class Classe {
 						enCommentaire = false;
 					}
 				}
-				else if(temp.contains("*/"))
-				{
-					compteur++;
-					enCommentaire = false;
-				}
 			}
 			else
 			{
@@ -132,12 +127,26 @@ public class Classe {
 	/**
 	 * @return la densit� de commentaires pour une classe*/
 	public float classe_DC() {
-		return (float)classe_CLOC() / (float)classe_LOC();
+		if(classe_CLOC() == 0)
+		{
+			return 0;
+		}
+		else
+		{
+			return (float)classe_CLOC() / (float)classe_LOC();
+		}
 	}
 	/**
 	 * @return le degr� selon lequel une classe est bien comment�e */
 	public float classe_BC() {
+		if(classe_DC() == 0)
+		{
+			return 0;
+		}
+		else
+		{
 		return (float)classe_DC() / (float)WMC();
+		}
 	}
 	/**
 	 * @return la somme pond�r�e des complexit�s des m�thodes d'une classe */

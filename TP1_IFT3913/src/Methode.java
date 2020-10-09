@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -27,14 +28,14 @@ public class Methode {
 			this.commentaireAvantMethode = new ArrayList<String>();
 			trouverCommentaireAvantMethode();
 		}
+		//Constructeur pour les tests case
 		
-		public Methode(String ligne, File fichier)
+		public Methode(String ligne, File fichier) throws IOException
 		{
 			this.signature = trouverSignature(ligne);
-			this.ligne = ligne;
 			lireFicherEnOrdre(fichier);
 			this.contenuMethode = new ArrayList<String>();
-			trouverContenuMethode();
+			this.contenuMethode = this.fichier;
 			this.commentaireAvantMethode = new ArrayList<String>();
 			trouverCommentaireAvantMethode();
 		}
@@ -45,7 +46,10 @@ public class Methode {
 			String separationMethode1[] = StringUtils.substringBetween(ligne, "", "(").split(" ");
 			String separationMethode2 = StringUtils.substringBetween(ligne, separationMethode1[separationMethode1.length - 1], ")");
 			String signature = separationMethode1[separationMethode1.length - 1] + separationMethode2 + ")";
-			
+			signature =signature.replace(",", "_");
+			signature = signature.replace("(", "_");
+			signature = signature.replace(")", "");
+			System.out.println(signature);
 			return signature;
 		}
 		/**
@@ -137,12 +141,25 @@ public class Methode {
 		/**
 		 * @return la densit� de commentaires pour une m�thode*/
 		public float methode_DC() {
+			if(methode_CLOC() == 0)
+			{
+				return 0;
+			}
+			else {
 				return ((float)methode_CLOC() / (float)methode_LOC());
+			}
 		}
 		/**
 		 * @return le degr� selon lequel une m�thode est bien comment�e */
 		public float methode_BC() {
+			if(methode_DC() == 0)
+			{
+				return 0;
+			}
+			else
+			{
 			return ((float)methode_DC() / (float)CC());
+			}
 		}
 		/**
 		 * Trouve les commentaires qui se trouvent avant le debut d'une methode*/
@@ -201,13 +218,21 @@ public class Methode {
 					}
 					else
 					{
-						if(courant.contains("/**") || courant.contains("/*"))
+						if(courant == null || courant.trim().isEmpty())
+						{
+							courant = iterateurList.previous();
+						}
+
+						else if(courant.contains("/**") || courant.contains("/*"))
 						{
 							commentaireAvantMethode.add(courant);
 							return;
 						}
+						else
+						{
 						commentaireAvantMethode.add(courant);
 						courant = iterateurList.previous();
+						}
 					}
 		
 				}

@@ -1,4 +1,10 @@
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -16,6 +22,17 @@ public class Methode {
 			this.signature = trouverSignature(ligne);
 			this.ligne = ligne;
 			this.fichier = contenuFichier;
+			this.contenuMethode = new ArrayList<String>();
+			trouverContenuMethode();
+			this.commentaireAvantMethode = new ArrayList<String>();
+			trouverCommentaireAvantMethode();
+		}
+		
+		public Methode(String ligne, File fichier)
+		{
+			this.signature = trouverSignature(ligne);
+			this.ligne = ligne;
+			lireFicherEnOrdre(fichier);
 			this.contenuMethode = new ArrayList<String>();
 			trouverContenuMethode();
 			this.commentaireAvantMethode = new ArrayList<String>();
@@ -95,10 +112,10 @@ public class Methode {
 					{
 						compteur++;
 						dansCommentaire = true;
-					}
-					if(temp.contains("*/"))
-					{
-						dansCommentaire = false;
+						if(temp.contains("*/"))
+						{
+							dansCommentaire = false;
+						}
 					}
 				}
 				else
@@ -229,6 +246,25 @@ public class Methode {
 			}
 			return compteur;
 		}
+		
+		/**
+		 * @param le nom du fichier que l'on veut evaluer
+		 * @return retourne une liste de string qui contiennent du text*/
+		public void lireFicherEnOrdre(File fichier) 
+		  { 
+			String nomFichier = fichier.getAbsolutePath();
+		    List<String> lines = Collections.emptyList(); 
+		    try
+		    { 
+		      lines = Files.readAllLines(Paths.get(nomFichier), StandardCharsets.ISO_8859_1); 
+		    } 
+		    catch (IOException e) 
+		    { 
+		    	 
+		      e.printStackTrace(); 
+		    } 
+	             this.fichier = lines; 
+		  } 
 		//GETTER
 		public String getSignature() {
 			return signature;

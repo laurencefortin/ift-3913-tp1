@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.junit.Before;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -67,16 +69,93 @@ class MethodeTest {
 		File fileTemp = File.createTempFile("test", ".tmp");
 	    FileWriter writer = new FileWriter(fileTemp);
 	    writer.write(contenuTemp);
-	    writer.close();		    
-	    Classe classeTemp = new Classe(fileTemp);
-		List<String> tableauFichierTemp = classeTemp.getFileContent();
+	    writer.close();		
+	    String ligne = "public LocalDate StringtoDate(String date) {";
+	    methodeTest  = new Methode(ligne, fileTemp);
 		// Act.
 			
 		List<String> methodeTemp = classeTest.getMethods().get(0).getContentMethod();
 		
 		// Assert.
-		assertEquals(methodeTemp, tableauFichierTemp);
+		assertEquals(methodeTemp, methodeTest.getContentMethod());
+	}
+	
+	@Test //On ne trouvera pas le bon contenu de la methode s'il y a plusieurs accolades sur la 1ere ligne
+	public void testTrouverContenuMethode_MauvaisContenu() throws IOException
+	{
+		// Arrange.
+		String contenuTemp = "public LocalDate StringtoDate(String date) {if(something){\r\n"
+				+ "			return LocalDate.parse(date, formatter)};\r\n"
+				+ "		}\r\n";
+		File fileTemp = File.createTempFile("test", ".tmp");
+	    FileWriter writer = new FileWriter(fileTemp);
+	    writer.write(contenuTemp);
+	    writer.close();		    
+	    String ligne = "public LocalDate StringtoDate(String date) {if(something){";
+	    methodeTest  = new Methode(ligne, fileTemp);
+		// Act.
+			
 		
+		// Assert.
+	    Assertions.assertThrows(IndexOutOfBoundsException.class, () -> {
+	    	methodeTest.getContentMethod().get(2);
+	      });
 		
 	}
+	
+	@Test
+	public void testTrouverSignature_bonneSignature() throws IOException
+	{
+		// Arrange.
+		String contenuTemp = "public LocalDate StringtoDate(String date) {\r\n"
+				+ "			DateTimeFormatter formatter = DateTimeFormatter.ofPattern(\"dd-MM-yyyy\");\r\n"
+				+ "			return LocalDate.parse(date, formatter);\r\n"
+				+ "		}\r\n";
+		File fileTemp = File.createTempFile("test", ".tmp");
+	    FileWriter writer = new FileWriter(fileTemp);
+	    writer.write(contenuTemp);
+	    writer.close();		    
+	    String ligne = "public LocalDate StringtoDate(String date) {";
+	    methodeTest = new Methode(ligne, fileTemp);
+		String signature = "StringtoDate(String date)";
+		// Act.
+					
+		// Assert.
+		assertEquals(signature, methodeTest.getSignature());
+	}
+	
+	@Test // On ne trouvera pas la bonne signature si on a des parenthèses dans les arguments
+	public void testTrouverSignature_mauvaiseSignature() throws IOException
+	{
+		// Arrange.
+		String contenuTemp = "public LocalDate StringtoDate(methode(), String date) {\r\n"
+				+ "			DateTimeFormatter formatter = DateTimeFormatter.ofPattern(\"dd-MM-yyyy\");\r\n"
+				+ "			return LocalDate.parse(date, formatter);\r\n"
+				+ "		}\r\n";
+		
+		File fileTemp = File.createTempFile("test", ".tmp");
+	    FileWriter writer = new FileWriter(fileTemp);
+	    writer.write(contenuTemp);
+	    writer.close();		    
+	    String ligne = "public LocalDate StringtoDate(String date) {";
+	    methodeTest = new Methode(ligne, fileTemp);
+		String signature = "StringtoDate(methode(), String date)";
+		// Act.
+					
+		// Assert.
+		Assertions.assertNotEquals(signature, methodeTest.getSignature());
+	}
+	
+	public void testMethode_CLOC_bonContenu() throws IOException
+	{
+		// Arrange.
+
+		
+		// Act.
+					
+		// Assert.
+		assertEquals(0, classeTest.getMethods().get(0).methode_CLOC());
+	}
+	
+	
 }
